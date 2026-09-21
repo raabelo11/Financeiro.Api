@@ -18,7 +18,15 @@ export class ApiService {
     return this.http.get<LancamentoPorPeriodoReturn>(`${this.base}/Lancamentos/Periodo`, { params });
   }
 
-  createLancamento(payload: Partial<Lancamento>) {
-    return this.http.post(`${this.base}/Lancamentos`, payload);
+  createLancamento(payload: Partial<Lancamento>): Observable<Lancamento> {
+    return this.http.post<Lancamento>(`${this.base}/Lancamentos`, payload);
+  }
+
+  updateLancamento(id: number, payload: Partial<Lancamento>): Observable<Lancamento> {
+    return this.http.put<Lancamento>(`${this.base}/Lancamentos/${id}`, payload);
+  }
+
+  deleteLancamento(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.base}/Lancamentos/${id}`);
   }
 }

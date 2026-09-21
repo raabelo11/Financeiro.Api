@@ -6,11 +6,13 @@ import { LancamentosListComponent } from './pages/lancamentos/lancamentos-list.c
 import { LancamentoFormComponent } from './pages/lancamentos/lancamento-form.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: '', component: LoginComponent },
   { path: 'lancamentos', component: LancamentosListComponent },
   { path: 'novo', component: LancamentoFormComponent },
-  { path: '**', redirectTo: '' }
+  { path: 'editar/:id', component: LancamentoFormComponent },
+  { path: '**', redirectTo: 'dashboard' }
 ];
 
 @NgModule({

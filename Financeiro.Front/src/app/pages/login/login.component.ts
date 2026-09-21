@@ -12,14 +12,19 @@ export class LoginComponent {
   username = '';
   password = '';
   error = '';
+  loading = false;
   constructor(private auth: AuthService, private router: Router) { }
 
   submit() {
     this.error = '';
-    if (this.auth.login(this.username, this.password)) {
-      this.router.navigate(['/dashboard']);
-    } else {
-      this.error = 'Usuário ou senha inválidos (use admin/admin).';
-    }
+    this.loading = true;
+    setTimeout(() => {
+      if (this.auth.login(this.username, this.password)) {
+        this.router.navigate(['/dashboard']);
+      } else {
+        this.error = 'Usuario ou senha invalidos.';
+      }
+      this.loading = false;
+    }, 500);
   }
 }

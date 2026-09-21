@@ -1,2 +1,8 @@
-/* vazio - estilos globais em src/styles.scss */
-:host { display:block; }
+:host {
+  display: block;
+}
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+}

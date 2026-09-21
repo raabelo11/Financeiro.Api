@@ -1,34 +1,157 @@
-<div class="header">
+<div class="page-header">
   <div>
-    <h2>Lançamentos</h2>
-    <div style="color:#7a869a">Lista completa e filtros por período</div>
+    <h2>Lancamentos</h2>
+    <div class="subtitle">Gerencie seus lancamentos financeiros</div>
   </div>
   <div>
-    <button class="btn btn-primary" routerLink="/novo">Adicionar</button>
+    <button class="btn btn-primary" routerLink="/novo">
+      <span class="material-icons-outlined">add_circle_outline</span>
+      Novo Lancamento
+    </button>
   </div>
 </div>
 
-<div style="margin-top:12px; display:flex; gap:8px; align-items:center;">
-  <input class="input" type="date" [(ngModel)]="filtroInicio" />
-  <input class="input" type="date" [(ngModel)]="filtroFim" />
-  <button class="btn btn-success" (click)="buscarPorPeriodo()">Filtrar</button>
-  <button class="btn" (click)="loadAll()">Limpar</button>
+<div class="tabs">
+  <button type="button" class="tab" [class.active]="tabAtiva === 'todos'" (click)="tabAtiva = 'todos'">
+    Todos
+    <span class="tab-count">{{ countTodos }}</span>
+  </button>
+  <button type="button" class="tab" [class.active]="tabAtiva === 'receitas'" (click)="tabAtiva = 'receitas'">
+    Receitas
+    <span class="tab-count">{{ countReceitas }}</span>
+  </button>
+  <button type="button" class="tab" [class.active]="tabAtiva === 'despesas'" (click)="tabAtiva = 'despesas'">
+    Despesas
+    <span class="tab-count">{{ countDespesas }}</span>
+  </button>
 </div>
 
-<div style="margin-top:12px;" *ngIf="loading">Carregando...</div>
+<div class="card filters-section">
+  <div class="quick-filters">
+    <button type="button" class="quick-filter" [class.active]="periodoAtivo === 'todos'" (click)="selecionarPeriodo('todos')">
+      Todos
+    </button>
+    <button type="button" class="quick-filter" [class.active]="periodoAtivo === 'mes_atual'" (click)="selecionarPeriodo('mes_atual')">
+      Este Mes
+    </button>
+    <button type="button" class="quick-filter" [class.active]="periodoAtivo === 'mes_anterior'" (click)="selecionarPeriodo('mes_anterior')">
+      Mes Anterior
+    </button>
+    <button type="button" class="quick-filter" [class.active]="periodoAtivo === 'ano_atual'" (click)="selecionarPeriodo('ano_atual')">
+      Este Ano
+    </button>
+    <button type="button" class="quick-filter" [class.active]="periodoAtivo === 'personalizado'" (click)="selecionarPeriodo('personalizado')">
+      Personalizado
+    </button>
 
-<table class="table" *ngIf="!loading">
-  <thead>
-    <tr><th>Nome</th><th>Valor</th><th>Tipo</th><th>Data</th></tr>
-  </thead>
-  <tbody>
-        <tr *ngFor="let l of lancamentos">
-      <td>{{l.nomeLancamento}}</td>
-      <td>{{l.valorLancamento | currency:'BRL'}}</td>
-      <td><span [class]="'badge ' + (l.tipoLancamento === 0 ? 'badge-receita' : 'badge-despesa')">{{ l.tipoLancamento === 0 ? 'Receita' : 'Despesa' }}</span></td>
-      <td>{{l.dataLancamento | date:'shortDate'}}</td>
-    </tr>
-  </tbody>
-</table>
+    <button type="button" class="btn btn-outline btn-sm" *ngIf="temFiltroAtivo" (click)="limparFiltros()">
+      <span class="material-icons-outlined">filter_alt_off</span>
+      Limpar filtros
+    </button>
+  </div>
 
-<div *ngIf="saldoPeriodo !== null" style="margin-top:12px; font-weight:700">Saldo do período: {{saldoPeriodo | currency:'BRL'}}</div>
+  <div class="custom-filters" *ngIf="periodoAtivo === 'personalizado'">
+    <div class="input-group">
+      <label>Mes</label>
+      <select class="input" [(ngModel)]="mesSelecionado">
+        <option *ngFor="let mes of meses" [value]="mes.value">{{ mes.label }}</option>
+      </select>
+    </div>
+    <div class="input-group">
+      <label>Ano</label>
+      <select class="input" [(ngModel)]="anoSelecionado">
+        <option *ngFor="let ano of anos" [value]="ano">{{ ano }}</option>
+      </select>
+    </div>
+    <button type="button" class="btn btn-primary btn-sm" (click)="filtrarPorMesAno()">
+      <span class="material-icons-outlined">calendar_today</span>
+      Aplicar
+    </button>
+
+    <div class="input-group">
+      <label>Data inicio</label>
+      <input class="input" type="date" [(ngModel)]="filtroInicio" />
+    </div>
+    <div class="input-group">
+      <label>Data fim</label>
+      <input class="input" type="date" [(ngModel)]="filtroFim" />
+    </div>
+    <button type="button" class="btn btn-success btn-sm" (click)="buscarPorPeriodo()">
+      <span class="material-icons-outlined">search</span>
+      Filtrar
+    </button>
+  </div>
+</div>
+
+<div *ngIf="loading" class="loading">
+  <div class="spinner"></div>
+</div>
+
+<div class="card" *ngIf="!loading">
+  <div *ngIf="lancamentosFiltrados.length === 0" class="empty-state">
+    <span class="material-icons-outlined">receipt_long</span>
+    <div>Nenhum lancamento encontrado</div>
+  </div>
+
+  <div class="table-container" *ngIf="lancamentosFiltrados.length > 0">
+    <div class="list-stats">
+      <div class="stat-item">Receitas: <strong>{{ totalReceitas | currency:'BRL' }}</strong></div>
+      <div class="stat-item">Despesas: <strong>{{ totalDespesas | currency:'BRL' }}</strong></div>
+      <div class="stat-item">Itens: <strong>{{ lancamentosFiltrados.length }}</strong></div>
+    </div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Valor</th>
+          <th>Tipo</th>
+          <th>Data</th>
+          <th>Acoes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let l of lancamentosFiltrados">
+          <td class="nome-cell">{{ l.nomeLancamento }}</td>
+          <td [ngClass]="l.tipoLancamento === 0 ? 'valor-receita' : 'valor-despesa'">
+            {{ l.valorLancamento | currency:'BRL' }}
+          </td>
+          <td>
+            <span [class]="'badge ' + (l.tipoLancamento === 0 ? 'badge-receita' : 'badge-despesa')">
+              {{ l.tipoLancamento === 0 ? 'Receita' : 'Despesa' }}
+            </span>
+          </td>
+          <td>{{ l.dataLancamento | date:'shortDate' }}</td>
+          <td>
+            <button class="btn-icon" [routerLink]="['/editar', l.id]" title="Editar">
+              <span class="material-icons-outlined">edit</span>
+            </button>
+            <button class="btn-icon danger" (click)="confirmarExclusao(l)" title="Excluir">
+              <span class="material-icons-outlined">delete</span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="saldo-row" *ngIf="saldoPeriodo === null">
+      Saldo: {{ saldoLista | currency:'BRL' }}
+    </div>
+    <div class="saldo-row" *ngIf="saldoPeriodo !== null">
+      Saldo do periodo: {{ saldoPeriodo | currency:'BRL' }}
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" *ngIf="mostrarModalExcluir">
+  <div class="modal">
+    <h3>Excluir Lancamento</h3>
+    <p>Tem certeza que deseja excluir o lancamento '{{ lancamentoParaExcluir?.nomeLancamento }}'? Esta acao nao pode ser desfeita.</p>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-outline" (click)="cancelarExclusao()">Cancelar</button>
+      <button type="button" class="btn btn-danger" [disabled]="excluindo" (click)="excluirLancamento()">
+        {{ excluindo ? 'Excluindo...' : 'Excluir' }}
+      </button>
+    </div>
+  </div>
+</div>

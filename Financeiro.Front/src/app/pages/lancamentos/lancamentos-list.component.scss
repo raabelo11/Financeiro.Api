@@ -1,1 +1,60 @@
-/* local */
+.list-stats {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 8px;
+}
+
+.stat-item {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+
+  strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+}
+
+.filters-section {
+  margin-bottom: 20px;
+}
+
+.custom-filters {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.custom-filters .input-group {
+  flex: 1;
+  min-width: 150px;
+  max-width: 200px;
+}
+
+.tab-count {
+  background: var(--border);
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  margin-left: 6px;
+}
+
+.tab.active .tab-count {
+  background: rgba(79, 70, 229, 0.15);
+  color: var(--primary);
+}
+
+.nome-cell {
+  font-weight: 500;
+}
+
+.valor-receita {
+  color: var(--success);
+  font-weight: 600;
+}
+
+.valor-despesa {
+  color: var(--danger);
+  font-weight: 600;
+}

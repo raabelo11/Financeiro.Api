@@ -1,17 +1,54 @@
-<div class="container">
-  <div class="card" style="max-width:420px;margin:36px auto;">
-    <h2>Entrar</h2>
-    <div style="margin-top:12px;">
-      <input class="input" placeholder="Usuário" [(ngModel)]="username" />
+<div class="login-page">
+  <div class="login-left">
+    <div class="login-brand">
+      <div class="login-logo">F</div>
+      <h1>Financeiro</h1>
+      <p>Gerencie suas financas de forma simples e eficiente</p>
     </div>
-    <div style="margin-top:8px;">
-      <input class="input" type="password" placeholder="Senha" [(ngModel)]="password" />
+    <div class="login-features">
+      <div class="feature">
+        <span class="material-icons-outlined">dashboard</span>
+        <span>Dashboard interativo</span>
+      </div>
+      <div class="feature">
+        <span class="material-icons-outlined">trending_up</span>
+        <span>Controle de receitas e despesas</span>
+      </div>
+      <div class="feature">
+        <span class="material-icons-outlined">filter_alt</span>
+        <span>Filtros por periodo</span>
+      </div>
     </div>
-    <div style="margin-top:12px; display:flex; gap:8px;">
-      <button class="btn btn-primary" (click)="submit()">Entrar</button>
-      <button class="btn" routerLink="/">Voltar</button>
+  </div>
+  <div class="login-right">
+    <div class="login-form-wrapper">
+      <h2>Entrar</h2>
+      <p class="login-subtitle">Acesse sua conta para continuar</p>
+
+      <div class="alert alert-danger" *ngIf="error">
+        <span class="material-icons-outlined" style="font-size:18px;">error_outline</span>
+        {{error}}
+      </div>
+
+      <div class="input-group">
+        <label>Usuario</label>
+        <input class="input" placeholder="Digite seu usuario" [(ngModel)]="username" (keyup.enter)="submit()" />
+      </div>
+
+      <div class="input-group" style="margin-top:16px;">
+        <label>Senha</label>
+        <input class="input" type="password" placeholder="Digite sua senha" [(ngModel)]="password" (keyup.enter)="submit()" />
+      </div>
+
+      <button class="btn btn-primary" style="width:100%; margin-top:24px; justify-content:center; padding:12px;" (click)="submit()" [disabled]="loading">
+        <span class="spinner" style="width:18px;height:18px;border-width:2px;" *ngIf="loading"></span>
+        {{ loading ? 'Entrando...' : 'Entrar' }}
+      </button>
+
+      <div class="login-hint">
+        <span class="material-icons-outlined" style="font-size:16px;">info</span>
+        Usuarios de teste: <strong>admin/admin</strong> ou <strong>usuario/usuario</strong>
+      </div>
     </div>
-    <div style="color:#d9534f; margin-top:10px;" *ngIf="error">{{error}}</div>
-    <div style="margin-top:8px; color:#7a869a; font-size:0.9rem">Usuários de teste: admin/admin e usuario/usuario</div>
   </div>
 </div>

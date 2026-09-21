@@ -1,29 +1,154 @@
-<div class="header">
+<div class="page-header">
   <div>
     <h2>Dashboard</h2>
-    <div style="color:#7a869a">Resumo dos últimos lançamentos</div>
+    <div class="subtitle">Visao geral das suas financas</div>
   </div>
   <div>
-    <button class="btn btn-primary" routerLink="/lancamentos">Ver lançamentos</button>
+    <button class="btn btn-primary" routerLink="/lancamentos">
+      Ver todos
+      <span class="material-icons-outlined">arrow_forward</span>
+    </button>
   </div>
 </div>
 
-<div *ngIf="loading">Carregando...</div>
+<div class="summary-cards">
+  <div class="summary-card">
+    <div class="summary-card-icon receita">
+      <span class="material-icons-outlined">trending_up</span>
+    </div>
+    <div class="summary-card-info">
+      <div class="summary-card-label">Receitas</div>
+      <div class="summary-card-value">{{ totalReceitas | currency:'BRL' }}</div>
+    </div>
+  </div>
 
-<div *ngIf="!loading">
-  <table class="table">
-    <thead>
-      <tr><th>Nome</th><th>Valor</th><th>Tipo</th><th>Data</th></tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let l of lancamentos | slice:0:8">
-        <td>{{l.nomeLancamento}}</td>
-        <td>{{l.valorLancamento | currency:'BRL'}}</td>
-        <td><span [class]="'badge ' + (l.tipoLancamento === 0 ? 'badge-receita' : 'badge-despesa')">{{ l.tipoLancamento === 0 ? 'Receita' : 'Despesa' }}</span></td>
-        <td>{{l.dataLancamento | date:'shortDate'}}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="summary-card">
+    <div class="summary-card-icon despesa">
+      <span class="material-icons-outlined">trending_down</span>
+    </div>
+    <div class="summary-card-info">
+      <div class="summary-card-label">Despesas</div>
+      <div class="summary-card-value">{{ totalDespesas | currency:'BRL' }}</div>
+    </div>
+  </div>
 
-  <div style="margin-top:12px; font-weight:700">Saldo atual: {{saldoTotal | currency:'BRL'}}</div>
+  <div class="summary-card">
+    <div class="summary-card-icon saldo">
+      <span class="material-icons-outlined">account_balance_wallet</span>
+    </div>
+    <div class="summary-card-info">
+      <div class="summary-card-label">Saldo</div>
+      <div class="summary-card-value">{{ saldoTotal | currency:'BRL' }}</div>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <div class="summary-card-icon total">
+      <span class="material-icons-outlined">receipt_long</span>
+    </div>
+    <div class="summary-card-info">
+      <div class="summary-card-label">Lancamentos</div>
+      <div class="summary-card-value">{{ countLancamentos }}</div>
+    </div>
+  </div>
+</div>
+
+<div class="card dashboard-period-card">
+  <div class="quick-filters">
+    <button
+      type="button"
+      class="quick-filter"
+      [class.active]="periodoAtivo === 'todos'"
+      (click)="selecionarPeriodo('todos')">
+      Todos
+    </button>
+    <button
+      type="button"
+      class="quick-filter"
+      [class.active]="periodoAtivo === 'mes_atual'"
+      (click)="selecionarPeriodo('mes_atual')">
+      Este Mes
+    </button>
+    <button
+      type="button"
+      class="quick-filter"
+      [class.active]="periodoAtivo === 'mes_anterior'"
+      (click)="selecionarPeriodo('mes_anterior')">
+      Mes Anterior
+    </button>
+    <button
+      type="button"
+      class="quick-filter"
+      [class.active]="periodoAtivo === 'ano_atual'"
+      (click)="selecionarPeriodo('ano_atual')">
+      Este Ano
+    </button>
+  </div>
+
+  <div class="period-selects">
+    <div class="input-group">
+      <select class="input" [(ngModel)]="mesSelecionado">
+        <option *ngFor="let mes of meses" [value]="mes.value">{{ mes.label }}</option>
+      </select>
+    </div>
+    <div class="input-group">
+      <select class="input" [(ngModel)]="anoSelecionado">
+        <option *ngFor="let ano of anos" [value]="ano">{{ ano }}</option>
+      </select>
+    </div>
+    <button type="button" class="btn btn-primary btn-sm" (click)="filtrarPorMesAno()">
+      <span class="material-icons-outlined">calendar_today</span>
+      Filtrar
+    </button>
+  </div>
+</div>
+
+<div *ngIf="loading" class="loading">
+  <div class="spinner"></div>
+</div>
+
+<div class="card" *ngIf="!loading">
+  <div class="recent-header">
+    <h3>Ultimos Lancamentos</h3>
+    <a routerLink="/lancamentos">
+      Ver todos
+      <span class="material-icons-outlined">arrow_forward</span>
+    </a>
+  </div>
+
+  <div *ngIf="recentLancamentos.length === 0" class="empty-state">
+    <span class="material-icons-outlined">receipt_long</span>
+    <div>Nenhum lancamento encontrado</div>
+  </div>
+
+  <div class="table-container" *ngIf="recentLancamentos.length > 0">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Valor</th>
+          <th>Tipo</th>
+          <th>Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let l of recentLancamentos">
+          <td>{{ l.nomeLancamento }}</td>
+          <td [ngClass]="l.tipoLancamento === 0 ? 'value-positive' : 'value-negative'">
+            {{ l.valorLancamento | currency:'BRL' }}
+          </td>
+          <td>
+            <span [class]="'badge ' + (l.tipoLancamento === 0 ? 'badge-receita' : 'badge-despesa')">
+              {{ l.tipoLancamento === 0 ? 'Receita' : 'Despesa' }}
+            </span>
+          </td>
+          <td>{{ l.dataLancamento | date:'shortDate' }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="saldo-row">
+      Saldo atual: {{ saldoTotal | currency:'BRL' }}
+    </div>
+  </div>
 </div>
