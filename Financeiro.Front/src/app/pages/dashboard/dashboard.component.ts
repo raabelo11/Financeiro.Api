@@ -20,6 +20,7 @@ export class DashboardComponent implements OnInit {
   totalReceitas = 0;
   totalDespesas = 0;
   saldoTotal = 0;
+  saldoPeriodo: number | null = null;
   countLancamentos = 0;
 
   loading = false;
@@ -59,6 +60,7 @@ export class DashboardComponent implements OnInit {
 
   load() {
     this.loading = true;
+    this.saldoPeriodo = null;
     this.api.getLancamentos().subscribe({
       next: (res) => {
         this.lancamentos = res;
@@ -111,6 +113,7 @@ export class DashboardComponent implements OnInit {
     this.api.getLancamentosPorPeriodo(inicio, fim).subscribe({
       next: (res) => {
         this.lancamentos = res.lancamentos;
+        this.saldoPeriodo = res.saldoPeriodo;
         this.atualizarListaExibida();
         this.calcularTotais();
         this.loading = false;
@@ -123,13 +126,17 @@ export class DashboardComponent implements OnInit {
     this.recentLancamentos = this.lancamentos.slice(0, 8);
   }
 
+  get saldoExibido(): number {
+    return this.saldoPeriodo !== null ? this.saldoPeriodo : this.saldoTotal;
+  }
+
   private calcularTotais() {
     this.totalReceitas = this.lancamentos
-      .filter(l => l.tipoLancamento === 0)
+      .filter(l => +l.tipoLancamento === 0)
       .reduce((s, l) => s + l.valorLancamento, 0);
 
     this.totalDespesas = this.lancamentos
-      .filter(l => l.tipoLancamento === 1)
+      .filter(l => +l.tipoLancamento === 1)
       .reduce((s, l) => s + l.valorLancamento, 0);
 
     this.saldoTotal = this.totalReceitas - this.totalDespesas;
