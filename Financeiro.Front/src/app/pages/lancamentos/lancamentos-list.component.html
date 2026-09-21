@@ -1,0 +1,34 @@
+<div class="header">
+  <div>
+    <h2>Lançamentos</h2>
+    <div style="color:#7a869a">Lista completa e filtros por período</div>
+  </div>
+  <div>
+    <button class="btn btn-primary" routerLink="/novo">Adicionar</button>
+  </div>
+</div>
+
+<div style="margin-top:12px; display:flex; gap:8px; align-items:center;">
+  <input class="input" type="date" [(ngModel)]="filtroInicio" />
+  <input class="input" type="date" [(ngModel)]="filtroFim" />
+  <button class="btn btn-success" (click)="buscarPorPeriodo()">Filtrar</button>
+  <button class="btn" (click)="loadAll()">Limpar</button>
+</div>
+
+<div style="margin-top:12px;" *ngIf="loading">Carregando...</div>
+
+<table class="table" *ngIf="!loading">
+  <thead>
+    <tr><th>Nome</th><th>Valor</th><th>Tipo</th><th>Data</th></tr>
+  </thead>
+  <tbody>
+        <tr *ngFor="let l of lancamentos">
+      <td>{{l.nomeLancamento}}</td>
+      <td>{{l.valorLancamento | currency:'BRL'}}</td>
+      <td><span [class]="'badge ' + (l.tipoLancamento === 0 ? 'badge-receita' : 'badge-despesa')">{{ l.tipoLancamento === 0 ? 'Receita' : 'Despesa' }}</span></td>
+      <td>{{l.dataLancamento | date:'shortDate'}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="saldoPeriodo !== null" style="margin-top:12px; font-weight:700">Saldo do período: {{saldoPeriodo | currency:'BRL'}}</div>

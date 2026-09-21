@@ -1,0 +1,29 @@
+<div class="header">
+  <div>
+    <h2>Dashboard</h2>
+    <div style="color:#7a869a">Resumo dos últimos lançamentos</div>
+  </div>
+  <div>
+    <button class="btn btn-primary" routerLink="/lancamentos">Ver lançamentos</button>
+  </div>
+</div>
+
+<div *ngIf="loading">Carregando...</div>
+
+<div *ngIf="!loading">
+  <table class="table">
+    <thead>
+      <tr><th>Nome</th><th>Valor</th><th>Tipo</th><th>Data</th></tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let l of lancamentos | slice:0:8">
+        <td>{{l.nomeLancamento}}</td>
+        <td>{{l.valorLancamento | currency:'BRL'}}</td>
+        <td><span [class]="'badge ' + (l.tipoLancamento === 0 ? 'badge-receita' : 'badge-despesa')">{{ l.tipoLancamento === 0 ? 'Receita' : 'Despesa' }}</span></td>
+        <td>{{l.dataLancamento | date:'shortDate'}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top:12px; font-weight:700">Saldo atual: {{saldoTotal | currency:'BRL'}}</div>
+</div>

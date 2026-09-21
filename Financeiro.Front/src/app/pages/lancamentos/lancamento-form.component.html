@@ -1,0 +1,15 @@
+<div class="header">
+  <div>
+    <h2>Novo Lançamento</h2>
+  </div>
+  <div>
+    <button class="btn" routerLink="/lancamentos">Voltar</button>
+  </div>
+</div>
+
+<form (ngSubmit)="submit()" style="margin-top:12px;" [formGroup]="form">
+  <div style="margin-bottom:8px;"><input class="input" formControlName="nomeLancamento" placeholder="Nome do lançamento" /></div>
+  <div style="margin-bottom:8px; display:flex; gap:8px;"><input class="input" type="number" formControlName="valorLancamento" placeholder="Valor" /></div>
+  <div style="margin-bottom:8px;"><select class="input" formControlName="tipoLancamento"><option [value]="0">Receita</option><option [value]="1">Despesa</option></select></div>
+  <div style="margin-top:12px;"><button class="btn btn-success" type="submit" [disabled]="saving">Salvar</button></div>
+</form>

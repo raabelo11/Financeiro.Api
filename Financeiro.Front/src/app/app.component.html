@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="card">
+    <div class="header">
+      <div class="brand">
+        <div class="logo">F</div>
+        <div>
+          <div style="font-weight:700;">Financeiro</div>
+          <div style="font-size:0.9rem; color:#7a869a">Painel financeiro simples</div>
+        </div>
+      </div>
+      <div>
+        <nav *ngIf="auth.isAuthenticated()">
+          <a routerLink="/">Dashboard</a>
+          <a routerLink="/lancamentos">Lançamentos</a>
+          <a routerLink="/novo">Novo</a>
+          <button class="btn" (click)="logout()">Sair</button>
+        </nav>
+        <nav *ngIf="!auth.isAuthenticated()">
+          <a routerLink="/login">Entrar</a>
+        </nav>
+      </div>
+    </div>
+
+    <router-outlet></router-outlet>
+
+    <div class="footer">API pronta em: <strong>{{'preencha em src/environments/environment.ts'}}</strong></div>
+  </div>
+</div>
