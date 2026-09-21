@@ -32,13 +32,13 @@
     </div>
   </div>
 
-  <div class="summary-card">
+  <div class="summary-card" [class.summary-card--positive]="saldoExibido >= 0">
     <div class="summary-card-icon saldo">
       <span class="material-icons-outlined">account_balance_wallet</span>
     </div>
     <div class="summary-card-info">
       <div class="summary-card-label">Saldo</div>
-      <div class="summary-card-value">{{ saldoTotal | currency:'BRL' }}</div>
+      <div class="summary-card-value">{{ saldoExibido | currency:'BRL' }}</div>
     </div>
   </div>
 
@@ -134,12 +134,12 @@
       <tbody>
         <tr *ngFor="let l of recentLancamentos">
           <td>{{ l.nomeLancamento }}</td>
-          <td [ngClass]="l.tipoLancamento === 0 ? 'value-positive' : 'value-negative'">
+          <td [ngClass]="l.tipoLancamento === 'Receita' ? 'value-positive' : 'value-negative'">
             {{ l.valorLancamento | currency:'BRL' }}
           </td>
           <td>
-            <span [class]="'badge ' + (l.tipoLancamento === 0 ? 'badge-receita' : 'badge-despesa')">
-              {{ l.tipoLancamento === 0 ? 'Receita' : 'Despesa' }}
+            <span [class]="'badge ' + (l.tipoLancamento === 'Receita' ? 'badge-receita' : 'badge-despesa')">
+              {{ l.tipoLancamento === 'Receita' ? 'Receita' : 'Despesa' }}
             </span>
           </td>
           <td>{{ l.dataLancamento | date:'shortDate' }}</td>
@@ -148,7 +148,10 @@
     </table>
 
     <div class="saldo-row">
-      Saldo atual: {{ saldoTotal | currency:'BRL' }}
+      <span>Saldo {{ saldoPeriodo !== null ? 'do periodo' : 'atual' }}:</span>
+      <span [ngClass]="saldoExibido >= 0 ? 'value-positive' : 'value-negative'">
+        {{ saldoExibido | currency:'BRL' }}
+      </span>
     </div>
   </div>
 </div>

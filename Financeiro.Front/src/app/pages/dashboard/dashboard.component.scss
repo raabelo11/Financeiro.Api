@@ -44,3 +44,8 @@
 .value-negative {
   color: var(--danger);
 }
+
+.summary-card--positive {
+  background: rgba(16, 185, 129, 0.06);
+  border-color: rgba(16, 185, 129, 0.25);
+}

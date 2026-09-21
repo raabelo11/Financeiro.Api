@@ -46963,13 +46963,13 @@ function DashboardComponent_div_73_div_9_tr_13_Template(rf, ctx) {
     \u0275\u0275advance(2);
     \u0275\u0275textInterpolate(l_r3.nomeLancamento);
     \u0275\u0275advance();
-    \u0275\u0275property("ngClass", l_r3.tipoLancamento === 0 ? "value-positive" : "value-negative");
+    \u0275\u0275property("ngClass", +l_r3.tipoLancamento === 0 ? "value-positive" : "value-negative");
     \u0275\u0275advance();
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(5, 7, l_r3.valorLancamento, "BRL"), " ");
     \u0275\u0275advance(3);
-    \u0275\u0275classMap("badge " + (l_r3.tipoLancamento === 0 ? "badge-receita" : "badge-despesa"));
+    \u0275\u0275classMap("badge " + (+l_r3.tipoLancamento === 0 ? "badge-receita" : "badge-despesa"));
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", l_r3.tipoLancamento === 0 ? "Receita" : "Despesa", " ");
+    \u0275\u0275textInterpolate1(" ", +l_r3.tipoLancamento === 0 ? "Receita" : "Despesa", " ");
     \u0275\u0275advance(2);
     \u0275\u0275textInterpolate(\u0275\u0275pipeBind2(11, 10, l_r3.dataLancamento, "shortDate"));
   }
@@ -46991,17 +46991,24 @@ function DashboardComponent_div_73_div_9_Template(rf, ctx) {
     \u0275\u0275elementStart(12, "tbody");
     \u0275\u0275template(13, DashboardComponent_div_73_div_9_tr_13_Template, 12, 13, "tr", 34);
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(14, "div", 35);
-    \u0275\u0275text(15);
-    \u0275\u0275pipe(16, "currency");
-    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(14, "div", 35)(15, "span");
+    \u0275\u0275text(16);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(17, "span", 36);
+    \u0275\u0275text(18);
+    \u0275\u0275pipe(19, "currency");
+    \u0275\u0275elementEnd()()();
   }
   if (rf & 2) {
     const ctx_r3 = \u0275\u0275nextContext(2);
     \u0275\u0275advance(13);
     \u0275\u0275property("ngForOf", ctx_r3.recentLancamentos);
-    \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" Saldo atual: ", \u0275\u0275pipeBind2(16, 2, ctx_r3.saldoTotal, "BRL"), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1("Saldo ", ctx_r3.saldoPeriodo !== null ? "do periodo" : "atual", ":");
+    \u0275\u0275advance();
+    \u0275\u0275property("ngClass", ctx_r3.saldoExibido >= 0 ? "value-positive" : "value-negative");
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(19, 4, ctx_r3.saldoExibido, "BRL"), " ");
   }
 }
 function DashboardComponent_div_73_Template(rf, ctx) {
@@ -47014,7 +47021,7 @@ function DashboardComponent_div_73_Template(rf, ctx) {
     \u0275\u0275elementStart(6, "span", 3);
     \u0275\u0275text(7, "arrow_forward");
     \u0275\u0275elementEnd()()();
-    \u0275\u0275template(8, DashboardComponent_div_73_div_8_Template, 5, 0, "div", 29)(9, DashboardComponent_div_73_div_9_Template, 17, 5, "div", 30);
+    \u0275\u0275template(8, DashboardComponent_div_73_div_8_Template, 5, 0, "div", 29)(9, DashboardComponent_div_73_div_9_Template, 20, 7, "div", 30);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
@@ -47033,6 +47040,7 @@ var _DashboardComponent = class _DashboardComponent {
     this.totalReceitas = 0;
     this.totalDespesas = 0;
     this.saldoTotal = 0;
+    this.saldoPeriodo = null;
     this.countLancamentos = 0;
     this.loading = false;
     this.periodoAtivo = "todos";
@@ -47061,6 +47069,7 @@ var _DashboardComponent = class _DashboardComponent {
   }
   load() {
     this.loading = true;
+    this.saldoPeriodo = null;
     this.api.getLancamentos().subscribe({
       next: (res) => {
         this.lancamentos = res;
@@ -47107,6 +47116,7 @@ var _DashboardComponent = class _DashboardComponent {
     this.api.getLancamentosPorPeriodo(inicio, fim).subscribe({
       next: (res) => {
         this.lancamentos = res.lancamentos;
+        this.saldoPeriodo = res.saldoPeriodo;
         this.atualizarListaExibida();
         this.calcularTotais();
         this.loading = false;
@@ -47119,9 +47129,12 @@ var _DashboardComponent = class _DashboardComponent {
   atualizarListaExibida() {
     this.recentLancamentos = this.lancamentos.slice(0, 8);
   }
+  get saldoExibido() {
+    return this.saldoPeriodo !== null ? this.saldoPeriodo : this.saldoTotal;
+  }
   calcularTotais() {
-    this.totalReceitas = this.lancamentos.filter((l) => l.tipoLancamento === 0).reduce((s, l) => s + l.valorLancamento, 0);
-    this.totalDespesas = this.lancamentos.filter((l) => l.tipoLancamento === 1).reduce((s, l) => s + l.valorLancamento, 0);
+    this.totalReceitas = this.lancamentos.filter((l) => +l.tipoLancamento === 0).reduce((s, l) => s + l.valorLancamento, 0);
+    this.totalDespesas = this.lancamentos.filter((l) => +l.tipoLancamento === 1).reduce((s, l) => s + l.valorLancamento, 0);
     this.saldoTotal = this.totalReceitas - this.totalDespesas;
     this.countLancamentos = this.lancamentos.length;
   }
@@ -47414,12 +47427,12 @@ var DashboardComponent = _DashboardComponent;
       <tbody>\r
         <tr *ngFor="let l of recentLancamentos">\r
           <td>{{ l.nomeLancamento }}</td>\r
-          <td [ngClass]="l.tipoLancamento === 0 ? 'value-positive' : 'value-negative'">\r
+          <td [ngClass]="+l.tipoLancamento === 0 ? 'value-positive' : 'value-negative'">\r
             {{ l.valorLancamento | currency:'BRL' }}\r
           </td>\r
           <td>\r
-            <span [class]="'badge ' + (l.tipoLancamento === 0 ? 'badge-receita' : 'badge-despesa')">\r
-              {{ l.tipoLancamento === 0 ? 'Receita' : 'Despesa' }}\r
+            <span [class]="'badge ' + (+l.tipoLancamento === 0 ? 'badge-receita' : 'badge-despesa')">\r
+              {{ +l.tipoLancamento === 0 ? 'Receita' : 'Despesa' }}\r
             </span>\r
           </td>\r
           <td>{{ l.dataLancamento | date:'shortDate' }}</td>\r
@@ -47428,7 +47441,10 @@ var DashboardComponent = _DashboardComponent;
     </table>\r
 \r
     <div class="saldo-row">\r
-      Saldo atual: {{ saldoTotal | currency:'BRL' }}\r
+      <span>Saldo {{ saldoPeriodo !== null ? 'do periodo' : 'atual' }}:</span>\r
+      <span [ngClass]="saldoExibido >= 0 ? 'value-positive' : 'value-negative'">\r
+        {{ saldoExibido | currency:'BRL' }}\r
+      </span>\r
     </div>\r
   </div>\r
 </div>\r
@@ -48319,9 +48335,9 @@ function LancamentoFormComponent_form_13_Template(rf, ctx) {
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", ((tmp_5_0 = ctx_r1.form.get("valorLancamento")) == null ? null : tmp_5_0.invalid) && ((tmp_5_0 = ctx_r1.form.get("valorLancamento")) == null ? null : tmp_5_0.touched));
     \u0275\u0275advance(5);
-    \u0275\u0275property("value", 0);
+    \u0275\u0275property("ngValue", 0);
     \u0275\u0275advance(2);
-    \u0275\u0275property("value", 1);
+    \u0275\u0275property("ngValue", 1);
     \u0275\u0275advance(5);
     \u0275\u0275property("disabled", ctx_r1.saving || ctx_r1.form.invalid);
     \u0275\u0275advance();
@@ -48408,7 +48424,7 @@ var _LancamentoFormComponent = class _LancamentoFormComponent {
 _LancamentoFormComponent.\u0275fac = function LancamentoFormComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _LancamentoFormComponent)(\u0275\u0275directiveInject(FormBuilder), \u0275\u0275directiveInject(ApiService), \u0275\u0275directiveInject(Router), \u0275\u0275directiveInject(ActivatedRoute));
 };
-_LancamentoFormComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LancamentoFormComponent, selectors: [["app-lancamento-form"]], standalone: false, decls: 14, vars: 4, consts: [[1, "page-header"], [1, "subtitle"], [1, "btn", "btn-outline", 3, "click"], [1, "material-icons-outlined"], [1, "card", "form-card"], ["class", "loading", 4, "ngIf"], [3, "formGroup", "ngSubmit", 4, "ngIf"], [1, "loading"], [1, "spinner"], [3, "ngSubmit", "formGroup"], [1, "form-section"], [1, "input-group"], ["formControlName", "nomeLancamento", "placeholder", "Ex.: Salario, Aluguel, Mercado...", 1, "input"], ["class", "validation-error", 4, "ngIf"], [1, "form-row"], ["type", "number", "step", "0.01", "formControlName", "valorLancamento", "placeholder", "0,00", 1, "input"], ["formControlName", "tipoLancamento", 1, "input"], [3, "value"], [1, "form-actions"], ["type", "button", 1, "btn", "btn-outline", 3, "click"], ["type", "submit", 1, "btn", "btn-primary", 3, "disabled"], ["class", "material-icons-outlined", 4, "ngIf"], [1, "validation-error"]], template: function LancamentoFormComponent_Template(rf, ctx) {
+_LancamentoFormComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LancamentoFormComponent, selectors: [["app-lancamento-form"]], standalone: false, decls: 14, vars: 4, consts: [[1, "page-header"], [1, "subtitle"], [1, "btn", "btn-outline", 3, "click"], [1, "material-icons-outlined"], [1, "card", "form-card"], ["class", "loading", 4, "ngIf"], [3, "formGroup", "ngSubmit", 4, "ngIf"], [1, "loading"], [1, "spinner"], [3, "ngSubmit", "formGroup"], [1, "form-section"], [1, "input-group"], ["formControlName", "nomeLancamento", "placeholder", "Ex.: Salario, Aluguel, Mercado...", 1, "input"], ["class", "validation-error", 4, "ngIf"], [1, "form-row"], ["type", "number", "step", "0.01", "formControlName", "valorLancamento", "placeholder", "0,00", 1, "input"], ["formControlName", "tipoLancamento", 1, "input"], [3, "ngValue"], [1, "form-actions"], ["type", "button", 1, "btn", "btn-outline", 3, "click"], ["type", "submit", 1, "btn", "btn-primary", 3, "disabled"], ["class", "material-icons-outlined", 4, "ngIf"], [1, "validation-error"]], template: function LancamentoFormComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 0)(1, "div")(2, "h2");
     \u0275\u0275text(3);
@@ -48495,8 +48511,8 @@ var LancamentoFormComponent = _LancamentoFormComponent;
       <div class="input-group">\r
         <label>Tipo</label>\r
         <select class="input" formControlName="tipoLancamento">\r
-          <option [value]="0">Receita</option>\r
-          <option [value]="1">Despesa</option>\r
+          <option [ngValue]="0">Receita</option>\r
+          <option [ngValue]="1">Despesa</option>\r
         </select>\r
       </div>\r
     </div>\r
