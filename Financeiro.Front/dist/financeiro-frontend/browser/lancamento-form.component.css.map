@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/pages/lancamentos/lancamento-form.component.scss"],
+  "sourcesContent": [".form-card {\r\n  max-width: 600px;\r\n}\r\n\r\n.validation-error {\r\n  color: var(--danger);\r\n  font-size: 0.75rem;\r\n  margin-top: 4px;\r\n}\r\n\r\n.input.invalid {\r\n  border-color: var(--danger);\r\n}\r\n\r\n.input.invalid:focus {\r\n  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);\r\n}\r\n"],
+  "mappings": ";AAAA,CAAA;AACE,aAAA;;AAGF,CAAA;AACE,SAAA,IAAA;AACA,aAAA;AACA,cAAA;;AAGF,CAAA,KAAA,CAAA;AACE,gBAAA,IAAA;;AAGF,CAJA,KAIA,CAJA,OAIA;AACE,cAAA,EAAA,EAAA,EAAA,IAAA,KAAA,GAAA,EAAA,EAAA,EAAA,EAAA,EAAA;;",
+  "names": []
+}
