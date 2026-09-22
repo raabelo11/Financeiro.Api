@@ -1,7 +1,9 @@
 .list-stats {
   display: flex;
   gap: 24px;
-  margin-bottom: 8px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0;
 }
 
 .stat-item {
@@ -57,4 +59,16 @@
 .valor-despesa {
   color: var(--danger);
   font-weight: 600;
+}
+
+.saldo-positivo {
+  background: rgba(16, 185, 129, 0.07);
+  border-color: rgba(16, 185, 129, 0.25);
+  color: var(--success);
+}
+
+.saldo-negativo {
+  background: rgba(239, 68, 68, 0.06);
+  border-color: rgba(239, 68, 68, 0.2);
+  color: var(--danger);
 }
