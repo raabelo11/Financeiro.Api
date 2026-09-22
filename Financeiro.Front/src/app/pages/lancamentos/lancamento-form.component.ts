@@ -14,7 +14,7 @@ export class LancamentoFormComponent implements OnInit {
   form = this.fb.group({
     nomeLancamento: ['', Validators.required],
     valorLancamento: [0, [Validators.required]],
-    tipoLancamento: [0, Validators.required]
+    tipoLancamento: ['', Validators.required]
   });
 
   editMode = false;
@@ -64,7 +64,7 @@ export class LancamentoFormComponent implements OnInit {
     this.saving = true;
 
     const { nomeLancamento, valorLancamento, tipoLancamento } = this.form.value;
-    const tipo: 'Receita' | 'Despesa' = tipoLancamento === 0 ? 'Receita' : 'Despesa';
+    const tipo: 'Receita' | 'Despesa' = tipoLancamento === 'Receita' ? 'Receita' : 'Despesa';
 
     const payload: CriarLancamentoPayload = {
       nomeLancamento: nomeLancamento!,
@@ -78,7 +78,7 @@ export class LancamentoFormComponent implements OnInit {
         if (this.lancamentosAdicionados.length > 5) {
           this.lancamentosAdicionados.pop();
         }
-        this.form.reset({ nomeLancamento: '', valorLancamento: 0, tipoLancamento: 0 });
+        this.form.reset({ nomeLancamento: '', valorLancamento: 0, tipoLancamento: 'Receita' });
         this.saving = false;
       },
       error: () => { this.saving = false; }

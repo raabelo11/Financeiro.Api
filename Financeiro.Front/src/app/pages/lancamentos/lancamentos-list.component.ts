@@ -19,6 +19,7 @@ export class LancamentosListComponent implements OnInit {
   filtroFim: string = '';
   saldoPeriodo: number | null = null;
   loading = false;
+  somaTotal: string = 'Soma Total';
 
   tabAtiva: 'todos' | 'receitas' | 'despesas' = 'todos';
   periodoAtivo: 'todos' | 'mes_atual' | 'mes_anterior' | 'ano_atual' | 'personalizado' = 'todos';
@@ -60,23 +61,35 @@ export class LancamentosListComponent implements OnInit {
 
   get lancamentosFiltrados(): Lancamento[] {
     if (this.tabAtiva === 'receitas') {
-      return this.lancamentos ? this.lancamentos.lancamentos.filter(l => l.tipoLancamento === 0) : [];
+      this.somaTotal = 'Total Receitas';
+      if (this.lancamentos) {
+        this.saldoPeriodo = this.lancamentos.totalReceitas ?? 0;
+      }
+      return this.lancamentos ? this.lancamentos.lancamentos.filter(l => l.tipoLancamento === 'Receita') : [];
     }
     if (this.tabAtiva === 'despesas') {
-      return this.lancamentos ? this.lancamentos.lancamentos.filter(l => l.tipoLancamento === 1) : [];
+      this.somaTotal = 'Total Despesas';
+      if (this.lancamentos) {
+        this.saldoPeriodo = this.lancamentos.totalDespesas ?? 0;
+      }
+      return this.lancamentos ? this.lancamentos.lancamentos.filter(l => l.tipoLancamento === 'Despesa') : [];
+    }
+    this.somaTotal = 'Saldo Total';
+    if (this.lancamentos) {
+      this.saldoPeriodo = this.lancamentos.totalReceitas - this.lancamentos.totalDespesas;
     }
     return this.lancamentos ? this.lancamentos.lancamentos : [];
   }
 
   get totalReceitas(): number {
     return this.lancamentos ? this.lancamentos.lancamentos
-      .filter(l => l.tipoLancamento === 0)
+      .filter(l => l.tipoLancamento === 'Receita')
       .reduce((s, l) => s + l.valorLancamento, 0) : 0;
   }
 
   get totalDespesas(): number {
     return this.lancamentos ? this.lancamentos.lancamentos
-      .filter(l => l.tipoLancamento === 1)
+      .filter(l => l.tipoLancamento === 'Despesa')
       .reduce((s, l) => s + l.valorLancamento, 0) : 0;
   }
 
@@ -89,11 +102,11 @@ export class LancamentosListComponent implements OnInit {
   }
 
   get countReceitas(): number {
-    return this.lancamentos ? this.lancamentos.lancamentos.filter(l => l.tipoLancamento === 0).length : 0;
+    return this.lancamentos ? this.lancamentos.lancamentos.filter(l => l.tipoLancamento === 'Receita').length : 0;
   }
 
   get countDespesas(): number {
-    return this.lancamentos ? this.lancamentos.lancamentos.filter(l => l.tipoLancamento === 1).length : 0;
+    return this.lancamentos ? this.lancamentos.lancamentos.filter(l => l.tipoLancamento === 'Despesa').length : 0;
   }
 
   get temFiltroAtivo(): boolean {

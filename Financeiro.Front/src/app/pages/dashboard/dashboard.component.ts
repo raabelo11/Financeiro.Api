@@ -118,9 +118,14 @@ export class DashboardComponent implements OnInit {
     this.loading = true;
     const inicio = this.formatarData(dataInicio);
     const fim = this.formatarData(dataFim);
-
+    this.semLancamentos = false;
     this.api.getLancamentosPorPeriodo(inicio, fim).subscribe({
       next: (res) => {
+        if (!res) {
+          this.semLancamentos = true;
+          this.loading = false;
+          return;
+        }
         this.lancamentos = res;
         this.saldoPeriodo = res.saldoPeriodo;
         this.atualizarListaExibida();

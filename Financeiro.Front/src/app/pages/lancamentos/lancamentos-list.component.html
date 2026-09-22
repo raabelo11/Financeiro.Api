@@ -107,7 +107,7 @@
           <th>Valor</th>
           <th>Tipo</th>
           <th>Data</th>
-          <th>Acoes</th>
+          <th>Ações</th>
         </tr>
       </thead>
       <tbody>
@@ -121,7 +121,7 @@
               {{ l.tipoLancamento === 'Receita' ? 'Receita' : 'Despesa' }}
             </span>
           </td>
-          <td>{{ l.dataLancamento | date:'shortDate' }}</td>
+          <td>{{ l.dataLancamento | date:'dd/MM/yyyy' }}</td>
           <td>
             <button class="btn-icon" [routerLink]="['/editar', l.id]" title="Editar">
               <span class="material-icons-outlined">edit</span>
@@ -134,11 +134,10 @@
       </tbody>
     </table>
 
-    <div class="saldo-row" *ngIf="saldoPeriodo === null">
-      Saldo: {{ saldoLista | currency:'BRL' }}
-    </div>
-    <div class="saldo-row" *ngIf="saldoPeriodo !== null">
-      Saldo do periodo: {{ saldoPeriodo | currency:'BRL' }}
+    <div class="saldo-row"
+         [class.saldo-positivo]="tabAtiva !== 'despesas' && (saldoPeriodo ?? 0) > 0"
+         [class.saldo-negativo]="tabAtiva === 'despesas' || (saldoPeriodo ?? 0) < 0">
+      {{ somaTotal }}: {{ saldoPeriodo | currency:'BRL' }}
     </div>
   </div>
 </div>
