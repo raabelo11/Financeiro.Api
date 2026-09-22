@@ -367,3 +367,8 @@ FodyWeavers.xsd
 
 # Angular build output
 Financeiro.Front/dist/
+
+# SQLite local database
+app.db
+app.db-shm
+app.db-wal
