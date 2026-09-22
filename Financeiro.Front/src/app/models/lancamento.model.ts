@@ -6,7 +6,15 @@ export interface Lancamento {
   dataLancamento?: string;
 }
 
+export interface CriarLancamentoPayload {
+  nomeLancamento: string;
+  valorLancamento: number;
+  tipoLancamento: 'Receita' | 'Despesa';
+}
+
 export interface LancamentoPorPeriodoReturn {
   lancamentos: Lancamento[];
   saldoPeriodo: number;
+  totalReceitas: number;
+  totalDespesas: number;
 }

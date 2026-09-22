@@ -364,3 +364,6 @@ FodyWeavers.xsd
 
 # Angular cache
 .angular/
+
+# Angular build output
+Financeiro.Front/dist/

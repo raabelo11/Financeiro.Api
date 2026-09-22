@@ -20,7 +20,18 @@ namespace Financeiro.Api.Controllers
             if (lancamentos.Count == 0)
                 return NoContent();
 
-            return Ok(lancamentos);
+            var despesas = lancamentos.Where(p => p.TipoLancamento == TipoLancamento.Despesa).Sum(p => p.ValorLancamento);
+            var receitas = lancamentos.Where(p => p.TipoLancamento == TipoLancamento.Receita).Sum(p => p.ValorLancamento);
+
+            LancamentoPorPeriodoReturnValue ret = new LancamentoPorPeriodoReturnValue
+            {
+                Lancamentos = lancamentos,
+                SaldoPeriodo = receitas - despesas,
+                TotalReceitas = receitas,
+                TotalDespesas = despesas
+            };
+
+            return Ok(ret);
         }
 
         [HttpGet("Periodo")]
@@ -34,10 +45,15 @@ namespace Financeiro.Api.Controllers
             if (lancamentos.Count == 0)
                 return NoContent();
 
+            var despesas = lancamentos.Where(p => p.TipoLancamento == TipoLancamento.Despesa).Sum(p => p.ValorLancamento);
+            var receitas = lancamentos.Where(p => p.TipoLancamento == TipoLancamento.Receita).Sum(p => p.ValorLancamento);
+
             LancamentoPorPeriodoReturnValue ret = new LancamentoPorPeriodoReturnValue
             {
                 Lancamentos = lancamentos,
-                SaldoPeriodo = lancamentos.Sum(p => p.ValorLancamento)
+                SaldoPeriodo = receitas - despesas,
+                TotalReceitas = receitas,
+                TotalDespesas = despesas
             };
 
             return Ok(ret);

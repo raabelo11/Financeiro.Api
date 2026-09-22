@@ -2,6 +2,38 @@
   max-width: 600px;
 }
 
+.recent-adds-card {
+  max-width: 600px;
+  margin-top: 20px;
+}
+
+.recent-adds-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.recent-adds-count {
+  font-size: 0.75rem;
+  background: var(--border);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.valor-receita {
+  color: var(--success);
+  font-weight: 600;
+}
+
+.valor-despesa {
+  color: var(--danger);
+  font-weight: 600;
+}
+
 .validation-error {
   color: var(--danger);
   font-size: 0.75rem;
