@@ -12,33 +12,33 @@
 </div>
 
 <div class="summary-cards">
-  <div class="summary-card">
+  <div class="summary-card" [class.summary-card--positive]="totalReceitas > 0">
     <div class="summary-card-icon receita">
       <span class="material-icons-outlined">trending_up</span>
     </div>
     <div class="summary-card-info">
       <div class="summary-card-label">Receitas</div>
-      <div class="summary-card-value">{{ totalReceitas | currency:'BRL' }}</div>
+      <div class="summary-card-value value-positive">{{ totalReceitas | currency:'BRL' }}</div>
     </div>
   </div>
 
-  <div class="summary-card">
+  <div class="summary-card" [class.summary-card--negative]="totalDespesas > 0">
     <div class="summary-card-icon despesa">
       <span class="material-icons-outlined">trending_down</span>
     </div>
     <div class="summary-card-info">
       <div class="summary-card-label">Despesas</div>
-      <div class="summary-card-value">{{ totalDespesas | currency:'BRL' }}</div>
+      <div class="summary-card-value value-negative">{{ totalDespesas | currency:'BRL' }}</div>
     </div>
   </div>
 
-  <div class="summary-card" [class.summary-card--positive]="saldoExibido >= 0">
+  <div class="summary-card" [class.summary-card--positive]="saldoExibido > 0" [class.summary-card--negative]="saldoExibido < 0">
     <div class="summary-card-icon saldo">
       <span class="material-icons-outlined">account_balance_wallet</span>
     </div>
     <div class="summary-card-info">
       <div class="summary-card-label">Saldo</div>
-      <div class="summary-card-value">{{ saldoExibido | currency:'BRL' }}</div>
+      <div class="summary-card-value" [ngClass]="saldoExibido > 0 ? 'value-positive' : saldoExibido < 0 ? 'value-negative' : ''">{{ saldoExibido | currency:'BRL' }}</div>
     </div>
   </div>
 
@@ -116,12 +116,12 @@
     </a>
   </div>
 
-  <div *ngIf="recentLancamentos.length === 0" class="empty-state">
+  <div *ngIf="semLancamentos" class="empty-state">
     <span class="material-icons-outlined">receipt_long</span>
     <div>Nenhum lancamento encontrado</div>
   </div>
 
-  <div class="table-container" *ngIf="recentLancamentos.length > 0">
+  <div class="table-container" *ngIf="!semLancamentos && recentLancamentos">
     <table class="table">
       <thead>
         <tr>
@@ -132,7 +132,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let l of recentLancamentos">
+        <tr *ngFor="let l of recentLancamentos!.lancamentos">
           <td>{{ l.nomeLancamento }}</td>
           <td [ngClass]="l.tipoLancamento === 'Receita' ? 'value-positive' : 'value-negative'">
             {{ l.valorLancamento | currency:'BRL' }}
@@ -142,7 +142,7 @@
               {{ l.tipoLancamento === 'Receita' ? 'Receita' : 'Despesa' }}
             </span>
           </td>
-          <td>{{ l.dataLancamento | date:'shortDate' }}</td>
+          <td>{{ l.dataLancamento | date:'dd/MM/yyyy' }}</td>
         </tr>
       </tbody>
     </table>

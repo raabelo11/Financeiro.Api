@@ -113,12 +113,12 @@
       <tbody>
         <tr *ngFor="let l of lancamentosFiltrados">
           <td class="nome-cell">{{ l.nomeLancamento }}</td>
-          <td [ngClass]="l.tipoLancamento === 0 ? 'valor-receita' : 'valor-despesa'">
+          <td [ngClass]="l.tipoLancamento === 'Receita' ? 'valor-receita' : 'valor-despesa'">
             {{ l.valorLancamento | currency:'BRL' }}
           </td>
           <td>
-            <span [class]="'badge ' + (l.tipoLancamento === 0 ? 'badge-receita' : 'badge-despesa')">
-              {{ l.tipoLancamento === 0 ? 'Receita' : 'Despesa' }}
+            <span [class]="'badge ' + (l.tipoLancamento === 'Receita' ? 'badge-receita' : 'badge-despesa')">
+              {{ l.tipoLancamento === 'Receita' ? 'Receita' : 'Despesa' }}
             </span>
           </td>
           <td>{{ l.dataLancamento | date:'shortDate' }}</td>

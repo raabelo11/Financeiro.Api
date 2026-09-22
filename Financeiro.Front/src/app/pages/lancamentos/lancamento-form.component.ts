@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
+import { CriarLancamentoPayload } from '../../models/lancamento.model';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -21,6 +22,7 @@ export class LancamentoFormComponent implements OnInit {
   loading = false;
   saving = false;
   titulo = 'Novo Lancamento';
+  lancamentosAdicionados: CriarLancamentoPayload[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -43,7 +45,7 @@ export class LancamentoFormComponent implements OnInit {
     this.loading = true;
     this.api.getLancamentos().subscribe({
       next: (lancamentos) => {
-        const lancamento = lancamentos.find(l => l.id === id);
+        const lancamento = lancamentos.lancamentos.find(l => l.id === id);
         if (lancamento) {
           this.form.patchValue({
             nomeLancamento: lancamento.nomeLancamento,
@@ -61,17 +63,26 @@ export class LancamentoFormComponent implements OnInit {
     if (this.form.invalid) return;
     this.saving = true;
 
-    if (this.editMode && this.lancamentoId) {
-      this.api.updateLancamento(this.lancamentoId, this.form.value).subscribe({
-        next: () => { this.saving = false; this.router.navigate(['/lancamentos']); },
-        error: () => { this.saving = false; }
-      });
-    } else {
-      this.api.createLancamento(this.form.value).subscribe({
-        next: () => { this.saving = false; this.router.navigate(['/lancamentos']); },
-        error: () => { this.saving = false; }
-      });
-    }
+    const { nomeLancamento, valorLancamento, tipoLancamento } = this.form.value;
+    const tipo: 'Receita' | 'Despesa' = tipoLancamento === 0 ? 'Receita' : 'Despesa';
+
+    const payload: CriarLancamentoPayload = {
+      nomeLancamento: nomeLancamento!,
+      valorLancamento: valorLancamento!,
+      tipoLancamento: tipo
+    };
+
+    this.api.createLancamento(payload).subscribe({
+      next: () => {
+        this.lancamentosAdicionados.unshift(payload);
+        if (this.lancamentosAdicionados.length > 5) {
+          this.lancamentosAdicionados.pop();
+        }
+        this.form.reset({ nomeLancamento: '', valorLancamento: 0, tipoLancamento: 0 });
+        this.saving = false;
+      },
+      error: () => { this.saving = false; }
+    });
   }
 
   voltar() {

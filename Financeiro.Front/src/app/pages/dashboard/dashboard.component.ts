@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
-import { Lancamento } from '../../models/lancamento.model';
+import { Lancamento, LancamentoPorPeriodoReturn } from '../../models/lancamento.model';
 
 interface MesOption {
   value: number;
@@ -14,15 +14,15 @@ interface MesOption {
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  lancamentos: Lancamento[] = [];
-  recentLancamentos: Lancamento[] = [];
+  lancamentos: LancamentoPorPeriodoReturn | null = null;
+  recentLancamentos: LancamentoPorPeriodoReturn | null = null;
 
   totalReceitas = 0;
   totalDespesas = 0;
   saldoTotal = 0;
   saldoPeriodo: number | null = null;
   countLancamentos = 0;
-
+  semLancamentos = false;
   loading = false;
 
   periodoAtivo = 'todos';
@@ -63,9 +63,18 @@ export class DashboardComponent implements OnInit {
     this.saldoPeriodo = null;
     this.api.getLancamentos().subscribe({
       next: (res) => {
+        if (!res) {
+          this.semLancamentos = true;
+          this.loading = false;
+          return;
+        }
+        this.semLancamentos = false;
         this.lancamentos = res;
         this.atualizarListaExibida();
         this.calcularTotais();
+        this.saldoPeriodo = res.saldoPeriodo;
+        this.totalDespesas = res.totalDespesas;
+        this.totalReceitas = res.totalReceitas;
         this.loading = false;
       },
       error: () => { this.loading = false; }
@@ -112,7 +121,7 @@ export class DashboardComponent implements OnInit {
 
     this.api.getLancamentosPorPeriodo(inicio, fim).subscribe({
       next: (res) => {
-        this.lancamentos = res.lancamentos;
+        this.lancamentos = res;
         this.saldoPeriodo = res.saldoPeriodo;
         this.atualizarListaExibida();
         this.calcularTotais();
@@ -123,7 +132,10 @@ export class DashboardComponent implements OnInit {
   }
 
   private atualizarListaExibida() {
-    this.recentLancamentos = this.lancamentos.slice(0, 8);
+    this.recentLancamentos = this.lancamentos ? { 
+      ...this.lancamentos, 
+      lancamentos: this.lancamentos.lancamentos.slice(0, 8) 
+    } : null;
   }
 
   get saldoExibido(): number {
@@ -131,16 +143,16 @@ export class DashboardComponent implements OnInit {
   }
 
   private calcularTotais() {
-    this.totalReceitas = this.lancamentos
+    this.totalReceitas = this.lancamentos ? this.lancamentos.lancamentos
       .filter(l => +l.tipoLancamento === 0)
-      .reduce((s, l) => s + l.valorLancamento, 0);
+      .reduce((s, l) => s + l.valorLancamento, 0) : 0;
 
-    this.totalDespesas = this.lancamentos
+    this.totalDespesas = this.lancamentos ? this.lancamentos.lancamentos
       .filter(l => +l.tipoLancamento === 1)
-      .reduce((s, l) => s + l.valorLancamento, 0);
+      .reduce((s, l) => s + l.valorLancamento, 0) : 0;
 
     this.saldoTotal = this.totalReceitas - this.totalDespesas;
-    this.countLancamentos = this.lancamentos.length;
+    this.countLancamentos = this.lancamentos ? this.lancamentos.lancamentos.length : 0;
   }
 
   private gerarUltimosAnos(anoAtual: number): number[] {

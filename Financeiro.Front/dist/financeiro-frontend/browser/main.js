@@ -46900,7 +46900,7 @@ var ApiService = _ApiService;
 // src/app/pages/dashboard/dashboard.component.ts
 function DashboardComponent_option_64_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "option", 23);
+    \u0275\u0275elementStart(0, "option", 26);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -46913,7 +46913,7 @@ function DashboardComponent_option_64_Template(rf, ctx) {
 }
 function DashboardComponent_option_67_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "option", 23);
+    \u0275\u0275elementStart(0, "option", 26);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
@@ -46926,14 +46926,14 @@ function DashboardComponent_option_67_Template(rf, ctx) {
 }
 function DashboardComponent_div_72_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 24);
-    \u0275\u0275element(1, "div", 25);
+    \u0275\u0275elementStart(0, "div", 27);
+    \u0275\u0275element(1, "div", 28);
     \u0275\u0275elementEnd();
   }
 }
 function DashboardComponent_div_73_div_8_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 31)(1, "span", 3);
+    \u0275\u0275elementStart(0, "div", 34)(1, "span", 3);
     \u0275\u0275text(2, "receipt_long");
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(3, "div");
@@ -46946,7 +46946,7 @@ function DashboardComponent_div_73_div_9_tr_13_Template(rf, ctx) {
     \u0275\u0275elementStart(0, "tr")(1, "td");
     \u0275\u0275text(2);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "td", 36);
+    \u0275\u0275elementStart(3, "td", 39);
     \u0275\u0275text(4);
     \u0275\u0275pipe(5, "currency");
     \u0275\u0275elementEnd();
@@ -46963,20 +46963,20 @@ function DashboardComponent_div_73_div_9_tr_13_Template(rf, ctx) {
     \u0275\u0275advance(2);
     \u0275\u0275textInterpolate(l_r3.nomeLancamento);
     \u0275\u0275advance();
-    \u0275\u0275property("ngClass", +l_r3.tipoLancamento === 0 ? "value-positive" : "value-negative");
+    \u0275\u0275property("ngClass", l_r3.tipoLancamento === "Receita" ? "value-positive" : "value-negative");
     \u0275\u0275advance();
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(5, 7, l_r3.valorLancamento, "BRL"), " ");
     \u0275\u0275advance(3);
-    \u0275\u0275classMap("badge " + (+l_r3.tipoLancamento === 0 ? "badge-receita" : "badge-despesa"));
+    \u0275\u0275classMap("badge " + (l_r3.tipoLancamento === "Receita" ? "badge-receita" : "badge-despesa"));
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", +l_r3.tipoLancamento === 0 ? "Receita" : "Despesa", " ");
+    \u0275\u0275textInterpolate1(" ", l_r3.tipoLancamento === "Receita" ? "Receita" : "Despesa", " ");
     \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind2(11, 10, l_r3.dataLancamento, "shortDate"));
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind2(11, 10, l_r3.dataLancamento, "dd/MM/yyyy"));
   }
 }
 function DashboardComponent_div_73_div_9_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 32)(1, "table", 33)(2, "thead")(3, "tr")(4, "th");
+    \u0275\u0275elementStart(0, "div", 35)(1, "table", 36)(2, "thead")(3, "tr")(4, "th");
     \u0275\u0275text(5, "Nome");
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(6, "th");
@@ -46989,12 +46989,12 @@ function DashboardComponent_div_73_div_9_Template(rf, ctx) {
     \u0275\u0275text(11, "Data");
     \u0275\u0275elementEnd()()();
     \u0275\u0275elementStart(12, "tbody");
-    \u0275\u0275template(13, DashboardComponent_div_73_div_9_tr_13_Template, 12, 13, "tr", 34);
+    \u0275\u0275template(13, DashboardComponent_div_73_div_9_tr_13_Template, 12, 13, "tr", 37);
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(14, "div", 35)(15, "span");
+    \u0275\u0275elementStart(14, "div", 38)(15, "span");
     \u0275\u0275text(16);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(17, "span", 36);
+    \u0275\u0275elementStart(17, "span", 39);
     \u0275\u0275text(18);
     \u0275\u0275pipe(19, "currency");
     \u0275\u0275elementEnd()()();
@@ -47002,7 +47002,7 @@ function DashboardComponent_div_73_div_9_Template(rf, ctx) {
   if (rf & 2) {
     const ctx_r3 = \u0275\u0275nextContext(2);
     \u0275\u0275advance(13);
-    \u0275\u0275property("ngForOf", ctx_r3.recentLancamentos);
+    \u0275\u0275property("ngForOf", ctx_r3.recentLancamentos.lancamentos);
     \u0275\u0275advance(3);
     \u0275\u0275textInterpolate1("Saldo ", ctx_r3.saldoPeriodo !== null ? "do periodo" : "atual", ":");
     \u0275\u0275advance();
@@ -47013,35 +47013,36 @@ function DashboardComponent_div_73_div_9_Template(rf, ctx) {
 }
 function DashboardComponent_div_73_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 26)(1, "div", 27)(2, "h3");
+    \u0275\u0275elementStart(0, "div", 29)(1, "div", 30)(2, "h3");
     \u0275\u0275text(3, "Ultimos Lancamentos");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(4, "a", 28);
+    \u0275\u0275elementStart(4, "a", 31);
     \u0275\u0275text(5, " Ver todos ");
     \u0275\u0275elementStart(6, "span", 3);
     \u0275\u0275text(7, "arrow_forward");
     \u0275\u0275elementEnd()()();
-    \u0275\u0275template(8, DashboardComponent_div_73_div_8_Template, 5, 0, "div", 29)(9, DashboardComponent_div_73_div_9_Template, 20, 7, "div", 30);
+    \u0275\u0275template(8, DashboardComponent_div_73_div_8_Template, 5, 0, "div", 32)(9, DashboardComponent_div_73_div_9_Template, 20, 7, "div", 33);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
     const ctx_r3 = \u0275\u0275nextContext();
     \u0275\u0275advance(8);
-    \u0275\u0275property("ngIf", ctx_r3.recentLancamentos.length === 0);
+    \u0275\u0275property("ngIf", ctx_r3.semLancamentos);
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r3.recentLancamentos.length > 0);
+    \u0275\u0275property("ngIf", !ctx_r3.semLancamentos && ctx_r3.recentLancamentos);
   }
 }
 var _DashboardComponent = class _DashboardComponent {
   constructor(api) {
     this.api = api;
-    this.lancamentos = [];
-    this.recentLancamentos = [];
+    this.lancamentos = null;
+    this.recentLancamentos = null;
     this.totalReceitas = 0;
     this.totalDespesas = 0;
     this.saldoTotal = 0;
     this.saldoPeriodo = null;
     this.countLancamentos = 0;
+    this.semLancamentos = false;
     this.loading = false;
     this.periodoAtivo = "todos";
     this.meses = [
@@ -47072,9 +47073,18 @@ var _DashboardComponent = class _DashboardComponent {
     this.saldoPeriodo = null;
     this.api.getLancamentos().subscribe({
       next: (res) => {
+        if (!res) {
+          this.semLancamentos = true;
+          this.loading = false;
+          return;
+        }
+        this.semLancamentos = false;
         this.lancamentos = res;
         this.atualizarListaExibida();
         this.calcularTotais();
+        this.saldoPeriodo = res.saldoPeriodo;
+        this.totalDespesas = res.totalDespesas;
+        this.totalReceitas = res.totalReceitas;
         this.loading = false;
       },
       error: () => {
@@ -47115,7 +47125,7 @@ var _DashboardComponent = class _DashboardComponent {
     const fim = this.formatarData(dataFim);
     this.api.getLancamentosPorPeriodo(inicio, fim).subscribe({
       next: (res) => {
-        this.lancamentos = res.lancamentos;
+        this.lancamentos = res;
         this.saldoPeriodo = res.saldoPeriodo;
         this.atualizarListaExibida();
         this.calcularTotais();
@@ -47127,16 +47137,18 @@ var _DashboardComponent = class _DashboardComponent {
     });
   }
   atualizarListaExibida() {
-    this.recentLancamentos = this.lancamentos.slice(0, 8);
+    this.recentLancamentos = this.lancamentos ? __spreadProps(__spreadValues({}, this.lancamentos), {
+      lancamentos: this.lancamentos.lancamentos.slice(0, 8)
+    }) : null;
   }
   get saldoExibido() {
     return this.saldoPeriodo !== null ? this.saldoPeriodo : this.saldoTotal;
   }
   calcularTotais() {
-    this.totalReceitas = this.lancamentos.filter((l) => +l.tipoLancamento === 0).reduce((s, l) => s + l.valorLancamento, 0);
-    this.totalDespesas = this.lancamentos.filter((l) => +l.tipoLancamento === 1).reduce((s, l) => s + l.valorLancamento, 0);
+    this.totalReceitas = this.lancamentos ? this.lancamentos.lancamentos.filter((l) => +l.tipoLancamento === 0).reduce((s, l) => s + l.valorLancamento, 0) : 0;
+    this.totalDespesas = this.lancamentos ? this.lancamentos.lancamentos.filter((l) => +l.tipoLancamento === 1).reduce((s, l) => s + l.valorLancamento, 0) : 0;
     this.saldoTotal = this.totalReceitas - this.totalDespesas;
-    this.countLancamentos = this.lancamentos.length;
+    this.countLancamentos = this.lancamentos ? this.lancamentos.lancamentos.length : 0;
   }
   gerarUltimosAnos(anoAtual) {
     const anos = [];
@@ -47155,7 +47167,7 @@ var _DashboardComponent = class _DashboardComponent {
 _DashboardComponent.\u0275fac = function DashboardComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _DashboardComponent)(\u0275\u0275directiveInject(ApiService));
 };
-_DashboardComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _DashboardComponent, selectors: [["app-dashboard"]], standalone: false, decls: 74, vars: 27, consts: [[1, "page-header"], [1, "subtitle"], ["routerLink", "/lancamentos", 1, "btn", "btn-primary"], [1, "material-icons-outlined"], [1, "summary-cards"], [1, "summary-card"], [1, "summary-card-icon", "receita"], [1, "summary-card-info"], [1, "summary-card-label"], [1, "summary-card-value"], [1, "summary-card-icon", "despesa"], [1, "summary-card-icon", "saldo"], [1, "summary-card-icon", "total"], [1, "card", "dashboard-period-card"], [1, "quick-filters"], ["type", "button", 1, "quick-filter", 3, "click"], [1, "period-selects"], [1, "input-group"], [1, "input", 3, "ngModelChange", "ngModel"], [3, "value", 4, "ngFor", "ngForOf"], ["type", "button", 1, "btn", "btn-primary", "btn-sm", 3, "click"], ["class", "loading", 4, "ngIf"], ["class", "card", 4, "ngIf"], [3, "value"], [1, "loading"], [1, "spinner"], [1, "card"], [1, "recent-header"], ["routerLink", "/lancamentos"], ["class", "empty-state", 4, "ngIf"], ["class", "table-container", 4, "ngIf"], [1, "empty-state"], [1, "table-container"], [1, "table"], [4, "ngFor", "ngForOf"], [1, "saldo-row"], [3, "ngClass"]], template: function DashboardComponent_Template(rf, ctx) {
+_DashboardComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _DashboardComponent, selectors: [["app-dashboard"]], standalone: false, decls: 74, vars: 36, consts: [[1, "page-header"], [1, "subtitle"], ["routerLink", "/lancamentos", 1, "btn", "btn-primary"], [1, "material-icons-outlined"], [1, "summary-cards"], [1, "summary-card"], [1, "summary-card-icon", "receita"], [1, "summary-card-info"], [1, "summary-card-label"], [1, "summary-card-value", "value-positive"], [1, "summary-card-icon", "despesa"], [1, "summary-card-value", "value-negative"], [1, "summary-card-icon", "saldo"], [1, "summary-card-value", 3, "ngClass"], [1, "summary-card-icon", "total"], [1, "summary-card-value"], [1, "card", "dashboard-period-card"], [1, "quick-filters"], ["type", "button", 1, "quick-filter", 3, "click"], [1, "period-selects"], [1, "input-group"], [1, "input", 3, "ngModelChange", "ngModel"], [3, "value", 4, "ngFor", "ngForOf"], ["type", "button", 1, "btn", "btn-primary", "btn-sm", 3, "click"], ["class", "loading", 4, "ngIf"], ["class", "card", 4, "ngIf"], [3, "value"], [1, "loading"], [1, "spinner"], [1, "card"], [1, "recent-header"], ["routerLink", "/lancamentos"], ["class", "empty-state", 4, "ngIf"], ["class", "table-container", 4, "ngIf"], [1, "empty-state"], [1, "table-container"], [1, "table"], [4, "ngFor", "ngForOf"], [1, "saldo-row"], [3, "ngClass"]], template: function DashboardComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 0)(1, "div")(2, "h2");
     \u0275\u0275text(3, "Dashboard");
@@ -47184,68 +47196,68 @@ _DashboardComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ ty
     \u0275\u0275elementStart(26, "div", 7)(27, "div", 8);
     \u0275\u0275text(28, "Despesas");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(29, "div", 9);
+    \u0275\u0275elementStart(29, "div", 11);
     \u0275\u0275text(30);
     \u0275\u0275pipe(31, "currency");
     \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(32, "div", 5)(33, "div", 11)(34, "span", 3);
+    \u0275\u0275elementStart(32, "div", 5)(33, "div", 12)(34, "span", 3);
     \u0275\u0275text(35, "account_balance_wallet");
     \u0275\u0275elementEnd()();
     \u0275\u0275elementStart(36, "div", 7)(37, "div", 8);
     \u0275\u0275text(38, "Saldo");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(39, "div", 9);
+    \u0275\u0275elementStart(39, "div", 13);
     \u0275\u0275text(40);
     \u0275\u0275pipe(41, "currency");
     \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(42, "div", 5)(43, "div", 12)(44, "span", 3);
+    \u0275\u0275elementStart(42, "div", 5)(43, "div", 14)(44, "span", 3);
     \u0275\u0275text(45, "receipt_long");
     \u0275\u0275elementEnd()();
     \u0275\u0275elementStart(46, "div", 7)(47, "div", 8);
     \u0275\u0275text(48, "Lancamentos");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(49, "div", 9);
+    \u0275\u0275elementStart(49, "div", 15);
     \u0275\u0275text(50);
     \u0275\u0275elementEnd()()()();
-    \u0275\u0275elementStart(51, "div", 13)(52, "div", 14)(53, "button", 15);
+    \u0275\u0275elementStart(51, "div", 16)(52, "div", 17)(53, "button", 18);
     \u0275\u0275listener("click", function DashboardComponent_Template_button_click_53_listener() {
       return ctx.selecionarPeriodo("todos");
     });
     \u0275\u0275text(54, " Todos ");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(55, "button", 15);
+    \u0275\u0275elementStart(55, "button", 18);
     \u0275\u0275listener("click", function DashboardComponent_Template_button_click_55_listener() {
       return ctx.selecionarPeriodo("mes_atual");
     });
     \u0275\u0275text(56, " Este Mes ");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(57, "button", 15);
+    \u0275\u0275elementStart(57, "button", 18);
     \u0275\u0275listener("click", function DashboardComponent_Template_button_click_57_listener() {
       return ctx.selecionarPeriodo("mes_anterior");
     });
     \u0275\u0275text(58, " Mes Anterior ");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(59, "button", 15);
+    \u0275\u0275elementStart(59, "button", 18);
     \u0275\u0275listener("click", function DashboardComponent_Template_button_click_59_listener() {
       return ctx.selecionarPeriodo("ano_atual");
     });
     \u0275\u0275text(60, " Este Ano ");
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(61, "div", 16)(62, "div", 17)(63, "select", 18);
+    \u0275\u0275elementStart(61, "div", 19)(62, "div", 20)(63, "select", 21);
     \u0275\u0275twoWayListener("ngModelChange", function DashboardComponent_Template_select_ngModelChange_63_listener($event) {
       \u0275\u0275twoWayBindingSet(ctx.mesSelecionado, $event) || (ctx.mesSelecionado = $event);
       return $event;
     });
-    \u0275\u0275template(64, DashboardComponent_option_64_Template, 2, 2, "option", 19);
+    \u0275\u0275template(64, DashboardComponent_option_64_Template, 2, 2, "option", 22);
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(65, "div", 17)(66, "select", 18);
+    \u0275\u0275elementStart(65, "div", 20)(66, "select", 21);
     \u0275\u0275twoWayListener("ngModelChange", function DashboardComponent_Template_select_ngModelChange_66_listener($event) {
       \u0275\u0275twoWayBindingSet(ctx.anoSelecionado, $event) || (ctx.anoSelecionado = $event);
       return $event;
     });
-    \u0275\u0275template(67, DashboardComponent_option_67_Template, 2, 2, "option", 19);
+    \u0275\u0275template(67, DashboardComponent_option_67_Template, 2, 2, "option", 22);
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(68, "button", 20);
+    \u0275\u0275elementStart(68, "button", 23);
     \u0275\u0275listener("click", function DashboardComponent_Template_button_click_68_listener() {
       return ctx.filtrarPorMesAno();
     });
@@ -47254,15 +47266,23 @@ _DashboardComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ ty
     \u0275\u0275elementEnd();
     \u0275\u0275text(71, " Filtrar ");
     \u0275\u0275elementEnd()()();
-    \u0275\u0275template(72, DashboardComponent_div_72_Template, 2, 0, "div", 21)(73, DashboardComponent_div_73_Template, 10, 2, "div", 22);
+    \u0275\u0275template(72, DashboardComponent_div_72_Template, 2, 0, "div", 24)(73, DashboardComponent_div_73_Template, 10, 2, "div", 25);
   }
   if (rf & 2) {
-    \u0275\u0275advance(20);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind2(21, 18, ctx.totalReceitas, "BRL"));
-    \u0275\u0275advance(10);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind2(31, 21, ctx.totalDespesas, "BRL"));
-    \u0275\u0275advance(10);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind2(41, 24, ctx.saldoTotal, "BRL"));
+    \u0275\u0275advance(12);
+    \u0275\u0275classProp("summary-card--positive", ctx.totalReceitas > 0);
+    \u0275\u0275advance(8);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind2(21, 27, ctx.totalReceitas, "BRL"));
+    \u0275\u0275advance(2);
+    \u0275\u0275classProp("summary-card--negative", ctx.totalDespesas > 0);
+    \u0275\u0275advance(8);
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind2(31, 30, ctx.totalDespesas, "BRL"));
+    \u0275\u0275advance(2);
+    \u0275\u0275classProp("summary-card--positive", ctx.saldoExibido > 0)("summary-card--negative", ctx.saldoExibido < 0);
+    \u0275\u0275advance(7);
+    \u0275\u0275property("ngClass", ctx.saldoExibido > 0 ? "value-positive" : ctx.saldoExibido < 0 ? "value-negative" : "");
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind2(41, 33, ctx.saldoExibido, "BRL"));
     \u0275\u0275advance(10);
     \u0275\u0275textInterpolate(ctx.countLancamentos);
     \u0275\u0275advance(3);
@@ -47286,7 +47306,7 @@ _DashboardComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ ty
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", !ctx.loading);
   }
-}, dependencies: [NgClass, NgForOf, NgIf, RouterLink, NgSelectOption, \u0275NgSelectMultipleOption, SelectControlValueAccessor, NgControlStatus, NgModel, CurrencyPipe, DatePipe], styles: ["\n\n.dashboard-period-card[_ngcontent-%COMP%] {\n  padding: 18px;\n}\n.period-selects[_ngcontent-%COMP%] {\n  display: flex;\n  gap: 12px;\n  align-items: flex-end;\n  margin-top: 16px;\n}\n.period-selects[_ngcontent-%COMP%]   .input-group[_ngcontent-%COMP%] {\n  flex: 1;\n  max-width: 200px;\n}\n.recent-header[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-bottom: 16px;\n}\n.recent-header[_ngcontent-%COMP%]   h3[_ngcontent-%COMP%] {\n  margin: 0;\n  font-size: 1.1rem;\n  font-weight: 600;\n}\n.recent-header[_ngcontent-%COMP%]   a[_ngcontent-%COMP%] {\n  color: var(--primary);\n  text-decoration: none;\n  font-size: 0.875rem;\n  font-weight: 500;\n  display: inline-flex;\n  align-items: center;\n  gap: 4px;\n}\n.value-positive[_ngcontent-%COMP%] {\n  color: var(--success);\n}\n.value-negative[_ngcontent-%COMP%] {\n  color: var(--danger);\n}\n/*# sourceMappingURL=dashboard.component.css.map */"] });
+}, dependencies: [NgClass, NgForOf, NgIf, RouterLink, NgSelectOption, \u0275NgSelectMultipleOption, SelectControlValueAccessor, NgControlStatus, NgModel, CurrencyPipe, DatePipe], styles: ["\n\n.dashboard-period-card[_ngcontent-%COMP%] {\n  padding: 18px;\n}\n.period-selects[_ngcontent-%COMP%] {\n  display: flex;\n  gap: 12px;\n  align-items: flex-end;\n  margin-top: 16px;\n}\n.period-selects[_ngcontent-%COMP%]   .input-group[_ngcontent-%COMP%] {\n  flex: 1;\n  max-width: 200px;\n}\n.recent-header[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-bottom: 16px;\n}\n.recent-header[_ngcontent-%COMP%]   h3[_ngcontent-%COMP%] {\n  margin: 0;\n  font-size: 1.1rem;\n  font-weight: 600;\n}\n.recent-header[_ngcontent-%COMP%]   a[_ngcontent-%COMP%] {\n  color: var(--primary);\n  text-decoration: none;\n  font-size: 0.875rem;\n  font-weight: 500;\n  display: inline-flex;\n  align-items: center;\n  gap: 4px;\n}\n.value-positive[_ngcontent-%COMP%] {\n  color: var(--success);\n}\n.value-negative[_ngcontent-%COMP%] {\n  color: var(--danger);\n}\n.summary-card--positive[_ngcontent-%COMP%] {\n  background: rgba(16, 185, 129, 0.06);\n  border-color: rgba(16, 185, 129, 0.25);\n}\n.summary-card--negative[_ngcontent-%COMP%] {\n  background: rgba(239, 68, 68, 0.05);\n  border-color: rgba(239, 68, 68, 0.2);\n}\n/*# sourceMappingURL=dashboard.component.css.map */"] });
 var DashboardComponent = _DashboardComponent;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(DashboardComponent, [{
@@ -47305,33 +47325,33 @@ var DashboardComponent = _DashboardComponent;
 </div>\r
 \r
 <div class="summary-cards">\r
-  <div class="summary-card">\r
+  <div class="summary-card" [class.summary-card--positive]="totalReceitas > 0">\r
     <div class="summary-card-icon receita">\r
       <span class="material-icons-outlined">trending_up</span>\r
     </div>\r
     <div class="summary-card-info">\r
       <div class="summary-card-label">Receitas</div>\r
-      <div class="summary-card-value">{{ totalReceitas | currency:'BRL' }}</div>\r
+      <div class="summary-card-value value-positive">{{ totalReceitas | currency:'BRL' }}</div>\r
     </div>\r
   </div>\r
 \r
-  <div class="summary-card">\r
+  <div class="summary-card" [class.summary-card--negative]="totalDespesas > 0">\r
     <div class="summary-card-icon despesa">\r
       <span class="material-icons-outlined">trending_down</span>\r
     </div>\r
     <div class="summary-card-info">\r
       <div class="summary-card-label">Despesas</div>\r
-      <div class="summary-card-value">{{ totalDespesas | currency:'BRL' }}</div>\r
+      <div class="summary-card-value value-negative">{{ totalDespesas | currency:'BRL' }}</div>\r
     </div>\r
   </div>\r
 \r
-  <div class="summary-card">\r
+  <div class="summary-card" [class.summary-card--positive]="saldoExibido > 0" [class.summary-card--negative]="saldoExibido < 0">\r
     <div class="summary-card-icon saldo">\r
       <span class="material-icons-outlined">account_balance_wallet</span>\r
     </div>\r
     <div class="summary-card-info">\r
       <div class="summary-card-label">Saldo</div>\r
-      <div class="summary-card-value">{{ saldoTotal | currency:'BRL' }}</div>\r
+      <div class="summary-card-value" [ngClass]="saldoExibido > 0 ? 'value-positive' : saldoExibido < 0 ? 'value-negative' : ''">{{ saldoExibido | currency:'BRL' }}</div>\r
     </div>\r
   </div>\r
 \r
@@ -47409,12 +47429,12 @@ var DashboardComponent = _DashboardComponent;
     </a>\r
   </div>\r
 \r
-  <div *ngIf="recentLancamentos.length === 0" class="empty-state">\r
+  <div *ngIf="semLancamentos" class="empty-state">\r
     <span class="material-icons-outlined">receipt_long</span>\r
     <div>Nenhum lancamento encontrado</div>\r
   </div>\r
 \r
-  <div class="table-container" *ngIf="recentLancamentos.length > 0">\r
+  <div class="table-container" *ngIf="!semLancamentos && recentLancamentos">\r
     <table class="table">\r
       <thead>\r
         <tr>\r
@@ -47425,17 +47445,17 @@ var DashboardComponent = _DashboardComponent;
         </tr>\r
       </thead>\r
       <tbody>\r
-        <tr *ngFor="let l of recentLancamentos">\r
+        <tr *ngFor="let l of recentLancamentos!.lancamentos">\r
           <td>{{ l.nomeLancamento }}</td>\r
-          <td [ngClass]="+l.tipoLancamento === 0 ? 'value-positive' : 'value-negative'">\r
+          <td [ngClass]="l.tipoLancamento === 'Receita' ? 'value-positive' : 'value-negative'">\r
             {{ l.valorLancamento | currency:'BRL' }}\r
           </td>\r
           <td>\r
-            <span [class]="'badge ' + (+l.tipoLancamento === 0 ? 'badge-receita' : 'badge-despesa')">\r
-              {{ +l.tipoLancamento === 0 ? 'Receita' : 'Despesa' }}\r
+            <span [class]="'badge ' + (l.tipoLancamento === 'Receita' ? 'badge-receita' : 'badge-despesa')">\r
+              {{ l.tipoLancamento === 'Receita' ? 'Receita' : 'Despesa' }}\r
             </span>\r
           </td>\r
-          <td>{{ l.dataLancamento | date:'shortDate' }}</td>\r
+          <td>{{ l.dataLancamento | date:'dd/MM/yyyy' }}</td>\r
         </tr>\r
       </tbody>\r
     </table>\r
@@ -47448,7 +47468,7 @@ var DashboardComponent = _DashboardComponent;
     </div>\r
   </div>\r
 </div>\r
-`, styles: ["/* src/app/pages/dashboard/dashboard.component.scss */\n.dashboard-period-card {\n  padding: 18px;\n}\n.period-selects {\n  display: flex;\n  gap: 12px;\n  align-items: flex-end;\n  margin-top: 16px;\n}\n.period-selects .input-group {\n  flex: 1;\n  max-width: 200px;\n}\n.recent-header {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-bottom: 16px;\n}\n.recent-header h3 {\n  margin: 0;\n  font-size: 1.1rem;\n  font-weight: 600;\n}\n.recent-header a {\n  color: var(--primary);\n  text-decoration: none;\n  font-size: 0.875rem;\n  font-weight: 500;\n  display: inline-flex;\n  align-items: center;\n  gap: 4px;\n}\n.value-positive {\n  color: var(--success);\n}\n.value-negative {\n  color: var(--danger);\n}\n/*# sourceMappingURL=dashboard.component.css.map */\n"] }]
+`, styles: ["/* src/app/pages/dashboard/dashboard.component.scss */\n.dashboard-period-card {\n  padding: 18px;\n}\n.period-selects {\n  display: flex;\n  gap: 12px;\n  align-items: flex-end;\n  margin-top: 16px;\n}\n.period-selects .input-group {\n  flex: 1;\n  max-width: 200px;\n}\n.recent-header {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-bottom: 16px;\n}\n.recent-header h3 {\n  margin: 0;\n  font-size: 1.1rem;\n  font-weight: 600;\n}\n.recent-header a {\n  color: var(--primary);\n  text-decoration: none;\n  font-size: 0.875rem;\n  font-weight: 500;\n  display: inline-flex;\n  align-items: center;\n  gap: 4px;\n}\n.value-positive {\n  color: var(--success);\n}\n.value-negative {\n  color: var(--danger);\n}\n.summary-card--positive {\n  background: rgba(16, 185, 129, 0.06);\n  border-color: rgba(16, 185, 129, 0.25);\n}\n.summary-card--negative {\n  background: rgba(239, 68, 68, 0.05);\n  border-color: rgba(239, 68, 68, 0.2);\n}\n/*# sourceMappingURL=dashboard.component.css.map */\n"] }]
   }], () => [{ type: ApiService }], null);
 })();
 (() => {
@@ -47639,13 +47659,13 @@ function LancamentosListComponent_div_39_div_2_tr_30_Template(rf, ctx) {
     \u0275\u0275advance(2);
     \u0275\u0275textInterpolate(l_r7.nomeLancamento);
     \u0275\u0275advance();
-    \u0275\u0275property("ngClass", l_r7.tipoLancamento === 0 ? "valor-receita" : "valor-despesa");
+    \u0275\u0275property("ngClass", l_r7.tipoLancamento === "Receita" ? "valor-receita" : "valor-despesa");
     \u0275\u0275advance();
     \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(5, 8, l_r7.valorLancamento, "BRL"), " ");
     \u0275\u0275advance(3);
-    \u0275\u0275classMap("badge " + (l_r7.tipoLancamento === 0 ? "badge-receita" : "badge-despesa"));
+    \u0275\u0275classMap("badge " + (l_r7.tipoLancamento === "Receita" ? "badge-receita" : "badge-despesa"));
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", l_r7.tipoLancamento === 0 ? "Receita" : "Despesa", " ");
+    \u0275\u0275textInterpolate1(" ", l_r7.tipoLancamento === "Receita" ? "Receita" : "Despesa", " ");
     \u0275\u0275advance(2);
     \u0275\u0275textInterpolate(\u0275\u0275pipeBind2(11, 11, l_r7.dataLancamento, "shortDate"));
     \u0275\u0275advance(3);
@@ -47787,7 +47807,7 @@ function LancamentosListComponent_div_40_Template(rf, ctx) {
 var _LancamentosListComponent = class _LancamentosListComponent {
   constructor(api) {
     this.api = api;
-    this.lancamentos = [];
+    this.lancamentos = null;
     this.filtroInicio = "";
     this.filtroFim = "";
     this.saldoPeriodo = null;
@@ -47822,30 +47842,30 @@ var _LancamentosListComponent = class _LancamentosListComponent {
   }
   get lancamentosFiltrados() {
     if (this.tabAtiva === "receitas") {
-      return this.lancamentos.filter((l) => l.tipoLancamento === 0);
+      return this.lancamentos ? this.lancamentos.lancamentos.filter((l) => l.tipoLancamento === 0) : [];
     }
     if (this.tabAtiva === "despesas") {
-      return this.lancamentos.filter((l) => l.tipoLancamento === 1);
+      return this.lancamentos ? this.lancamentos.lancamentos.filter((l) => l.tipoLancamento === 1) : [];
     }
-    return this.lancamentos;
+    return this.lancamentos ? this.lancamentos.lancamentos : [];
   }
   get totalReceitas() {
-    return this.lancamentos.filter((l) => l.tipoLancamento === 0).reduce((s, l) => s + l.valorLancamento, 0);
+    return this.lancamentos ? this.lancamentos.lancamentos.filter((l) => l.tipoLancamento === 0).reduce((s, l) => s + l.valorLancamento, 0) : 0;
   }
   get totalDespesas() {
-    return this.lancamentos.filter((l) => l.tipoLancamento === 1).reduce((s, l) => s + l.valorLancamento, 0);
+    return this.lancamentos ? this.lancamentos.lancamentos.filter((l) => l.tipoLancamento === 1).reduce((s, l) => s + l.valorLancamento, 0) : 0;
   }
   get saldoLista() {
     return this.totalReceitas - this.totalDespesas;
   }
   get countTodos() {
-    return this.lancamentos.length;
+    return this.lancamentos ? this.lancamentos.lancamentos.length : 0;
   }
   get countReceitas() {
-    return this.lancamentos.filter((l) => l.tipoLancamento === 0).length;
+    return this.lancamentos ? this.lancamentos.lancamentos.filter((l) => l.tipoLancamento === 0).length : 0;
   }
   get countDespesas() {
-    return this.lancamentos.filter((l) => l.tipoLancamento === 1).length;
+    return this.lancamentos ? this.lancamentos.lancamentos.filter((l) => l.tipoLancamento === 1).length : 0;
   }
   get temFiltroAtivo() {
     return this.tabAtiva !== "todos" || this.periodoAtivo !== "todos";
@@ -47868,7 +47888,7 @@ var _LancamentosListComponent = class _LancamentosListComponent {
     this.loading = true;
     this.api.getLancamentosPorPeriodo(this.filtroInicio, this.filtroFim).subscribe({
       next: (r) => {
-        this.lancamentos = r.lancamentos;
+        this.lancamentos = r;
         this.saldoPeriodo = r.saldoPeriodo;
         this.loading = false;
       },
@@ -47923,21 +47943,6 @@ var _LancamentosListComponent = class _LancamentosListComponent {
     this.lancamentoParaExcluir = null;
   }
   excluirLancamento() {
-    if (!this.lancamentoParaExcluir || !this.lancamentoParaExcluir.id)
-      return;
-    const id = this.lancamentoParaExcluir.id;
-    this.excluindo = true;
-    this.api.deleteLancamento(id).subscribe({
-      next: () => {
-        this.lancamentos = this.lancamentos.filter((l) => l.id !== id);
-        this.excluindo = false;
-        this.mostrarModalExcluir = false;
-        this.lancamentoParaExcluir = null;
-      },
-      error: () => {
-        this.excluindo = false;
-      }
-    });
   }
   buscarPorIntervalo(dataInicio, dataFim) {
     this.loading = true;
@@ -47945,7 +47950,7 @@ var _LancamentosListComponent = class _LancamentosListComponent {
     const fim = this.formatarData(dataFim);
     this.api.getLancamentosPorPeriodo(inicio, fim).subscribe({
       next: (res) => {
-        this.lancamentos = res.lancamentos;
+        this.lancamentos = res;
         this.saldoPeriodo = res.saldoPeriodo;
         this.loading = false;
       },
@@ -48198,12 +48203,12 @@ var LancamentosListComponent = _LancamentosListComponent;
       <tbody>\r
         <tr *ngFor="let l of lancamentosFiltrados">\r
           <td class="nome-cell">{{ l.nomeLancamento }}</td>\r
-          <td [ngClass]="l.tipoLancamento === 0 ? 'valor-receita' : 'valor-despesa'">\r
+          <td [ngClass]="l.tipoLancamento === 'Receita' ? 'valor-receita' : 'valor-despesa'">\r
             {{ l.valorLancamento | currency:'BRL' }}\r
           </td>\r
           <td>\r
-            <span [class]="'badge ' + (l.tipoLancamento === 0 ? 'badge-receita' : 'badge-despesa')">\r
-              {{ l.tipoLancamento === 0 ? 'Receita' : 'Despesa' }}\r
+            <span [class]="'badge ' + (l.tipoLancamento === 'Receita' ? 'badge-receita' : 'badge-despesa')">\r
+              {{ l.tipoLancamento === 'Receita' ? 'Receita' : 'Despesa' }}\r
             </span>\r
           </td>\r
           <td>{{ l.dataLancamento | date:'shortDate' }}</td>\r
@@ -48250,21 +48255,21 @@ var LancamentosListComponent = _LancamentosListComponent;
 // src/app/pages/lancamentos/lancamento-form.component.ts
 function LancamentoFormComponent_div_12_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 7);
-    \u0275\u0275element(1, "div", 8);
+    \u0275\u0275elementStart(0, "div", 8);
+    \u0275\u0275element(1, "div", 9);
     \u0275\u0275elementEnd();
   }
 }
 function LancamentoFormComponent_form_13_div_6_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 22);
+    \u0275\u0275elementStart(0, "div", 23);
     \u0275\u0275text(1, " Informe o nome do lancamento. ");
     \u0275\u0275elementEnd();
   }
 }
 function LancamentoFormComponent_form_13_div_12_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 22);
+    \u0275\u0275elementStart(0, "div", 23);
     \u0275\u0275text(1, " Informe um valor valido. ");
     \u0275\u0275elementEnd();
   }
@@ -48279,34 +48284,34 @@ function LancamentoFormComponent_form_13_span_25_Template(rf, ctx) {
 function LancamentoFormComponent_form_13_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "form", 9);
+    \u0275\u0275elementStart(0, "form", 10);
     \u0275\u0275listener("ngSubmit", function LancamentoFormComponent_form_13_Template_form_ngSubmit_0_listener() {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.submit());
     });
-    \u0275\u0275elementStart(1, "div", 10)(2, "div", 11)(3, "label");
+    \u0275\u0275elementStart(1, "div", 11)(2, "div", 12)(3, "label");
     \u0275\u0275text(4, "Nome do Lancamento");
     \u0275\u0275elementEnd();
-    \u0275\u0275element(5, "input", 12);
-    \u0275\u0275template(6, LancamentoFormComponent_form_13_div_6_Template, 2, 0, "div", 13);
+    \u0275\u0275element(5, "input", 13);
+    \u0275\u0275template(6, LancamentoFormComponent_form_13_div_6_Template, 2, 0, "div", 14);
     \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(7, "div", 14)(8, "div", 11)(9, "label");
+    \u0275\u0275elementStart(7, "div", 15)(8, "div", 12)(9, "label");
     \u0275\u0275text(10, "Valor (R$)");
     \u0275\u0275elementEnd();
-    \u0275\u0275element(11, "input", 15);
-    \u0275\u0275template(12, LancamentoFormComponent_form_13_div_12_Template, 2, 0, "div", 13);
+    \u0275\u0275element(11, "input", 16);
+    \u0275\u0275template(12, LancamentoFormComponent_form_13_div_12_Template, 2, 0, "div", 14);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(13, "div", 11)(14, "label");
+    \u0275\u0275elementStart(13, "div", 12)(14, "label");
     \u0275\u0275text(15, "Tipo");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(16, "select", 16)(17, "option", 17);
+    \u0275\u0275elementStart(16, "select", 17)(17, "option", 18);
     \u0275\u0275text(18, "Receita");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(19, "option", 17);
+    \u0275\u0275elementStart(19, "option", 18);
     \u0275\u0275text(20, "Despesa");
     \u0275\u0275elementEnd()()()();
-    \u0275\u0275elementStart(21, "div", 18)(22, "button", 19);
+    \u0275\u0275elementStart(21, "div", 19)(22, "button", 20);
     \u0275\u0275listener("click", function LancamentoFormComponent_form_13_Template_button_click_22_listener() {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
@@ -48314,8 +48319,8 @@ function LancamentoFormComponent_form_13_Template(rf, ctx) {
     });
     \u0275\u0275text(23, "Cancelar");
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(24, "button", 20);
-    \u0275\u0275template(25, LancamentoFormComponent_form_13_span_25_Template, 2, 0, "span", 21);
+    \u0275\u0275elementStart(24, "button", 21);
+    \u0275\u0275template(25, LancamentoFormComponent_form_13_span_25_Template, 2, 0, "span", 22);
     \u0275\u0275text(26);
     \u0275\u0275elementEnd()()();
   }
@@ -48346,6 +48351,62 @@ function LancamentoFormComponent_form_13_Template(rf, ctx) {
     \u0275\u0275textInterpolate1(" ", ctx_r1.saving ? "Salvando..." : "Salvar", " ");
   }
 }
+function LancamentoFormComponent_div_14_tr_17_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "tr")(1, "td");
+    \u0275\u0275text(2);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(3, "td", 30);
+    \u0275\u0275text(4);
+    \u0275\u0275pipe(5, "currency");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(6, "td")(7, "span");
+    \u0275\u0275text(8);
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const l_r3 = ctx.$implicit;
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(l_r3.nomeLancamento);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngClass", l_r3.tipoLancamento === "Receita" ? "valor-receita" : "valor-despesa");
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", \u0275\u0275pipeBind2(5, 6, l_r3.valorLancamento, "BRL"), " ");
+    \u0275\u0275advance(3);
+    \u0275\u0275classMap("badge " + (l_r3.tipoLancamento === "Receita" ? "badge-receita" : "badge-despesa"));
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1(" ", l_r3.tipoLancamento, " ");
+  }
+}
+function LancamentoFormComponent_div_14_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 24)(1, "div", 25)(2, "span");
+    \u0275\u0275text(3, "Adicionados nesta sessao");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "span", 26);
+    \u0275\u0275text(5);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(6, "div", 27)(7, "table", 28)(8, "thead")(9, "tr")(10, "th");
+    \u0275\u0275text(11, "Nome");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(12, "th");
+    \u0275\u0275text(13, "Valor");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(14, "th");
+    \u0275\u0275text(15, "Tipo");
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275elementStart(16, "tbody");
+    \u0275\u0275template(17, LancamentoFormComponent_div_14_tr_17_Template, 9, 9, "tr", 29);
+    \u0275\u0275elementEnd()()()();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(5);
+    \u0275\u0275textInterpolate1("", ctx_r1.lancamentosAdicionados.length, "/5");
+    \u0275\u0275advance(12);
+    \u0275\u0275property("ngForOf", ctx_r1.lancamentosAdicionados);
+  }
+}
 var _LancamentoFormComponent = class _LancamentoFormComponent {
   constructor(fb, api, router, route) {
     this.fb = fb;
@@ -48362,6 +48423,7 @@ var _LancamentoFormComponent = class _LancamentoFormComponent {
     this.loading = false;
     this.saving = false;
     this.titulo = "Novo Lancamento";
+    this.lancamentosAdicionados = [];
   }
   ngOnInit() {
     const idParam = this.route.snapshot.paramMap.get("id");
@@ -48376,7 +48438,7 @@ var _LancamentoFormComponent = class _LancamentoFormComponent {
     this.loading = true;
     this.api.getLancamentos().subscribe({
       next: (lancamentos) => {
-        const lancamento = lancamentos.find((l) => l.id === id);
+        const lancamento = lancamentos.lancamentos.find((l) => l.id === id);
         if (lancamento) {
           this.form.patchValue({
             nomeLancamento: lancamento.nomeLancamento,
@@ -48395,27 +48457,26 @@ var _LancamentoFormComponent = class _LancamentoFormComponent {
     if (this.form.invalid)
       return;
     this.saving = true;
-    if (this.editMode && this.lancamentoId) {
-      this.api.updateLancamento(this.lancamentoId, this.form.value).subscribe({
-        next: () => {
-          this.saving = false;
-          this.router.navigate(["/lancamentos"]);
-        },
-        error: () => {
-          this.saving = false;
+    const { nomeLancamento, valorLancamento, tipoLancamento } = this.form.value;
+    const tipo = tipoLancamento === 0 ? "Receita" : "Despesa";
+    const payload = {
+      nomeLancamento,
+      valorLancamento,
+      tipoLancamento: tipo
+    };
+    this.api.createLancamento(payload).subscribe({
+      next: () => {
+        this.lancamentosAdicionados.unshift(payload);
+        if (this.lancamentosAdicionados.length > 5) {
+          this.lancamentosAdicionados.pop();
         }
-      });
-    } else {
-      this.api.createLancamento(this.form.value).subscribe({
-        next: () => {
-          this.saving = false;
-          this.router.navigate(["/lancamentos"]);
-        },
-        error: () => {
-          this.saving = false;
-        }
-      });
-    }
+        this.form.reset({ nomeLancamento: "", valorLancamento: 0, tipoLancamento: 0 });
+        this.saving = false;
+      },
+      error: () => {
+        this.saving = false;
+      }
+    });
   }
   voltar() {
     this.router.navigate(["/lancamentos"]);
@@ -48424,7 +48485,7 @@ var _LancamentoFormComponent = class _LancamentoFormComponent {
 _LancamentoFormComponent.\u0275fac = function LancamentoFormComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _LancamentoFormComponent)(\u0275\u0275directiveInject(FormBuilder), \u0275\u0275directiveInject(ApiService), \u0275\u0275directiveInject(Router), \u0275\u0275directiveInject(ActivatedRoute));
 };
-_LancamentoFormComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LancamentoFormComponent, selectors: [["app-lancamento-form"]], standalone: false, decls: 14, vars: 4, consts: [[1, "page-header"], [1, "subtitle"], [1, "btn", "btn-outline", 3, "click"], [1, "material-icons-outlined"], [1, "card", "form-card"], ["class", "loading", 4, "ngIf"], [3, "formGroup", "ngSubmit", 4, "ngIf"], [1, "loading"], [1, "spinner"], [3, "ngSubmit", "formGroup"], [1, "form-section"], [1, "input-group"], ["formControlName", "nomeLancamento", "placeholder", "Ex.: Salario, Aluguel, Mercado...", 1, "input"], ["class", "validation-error", 4, "ngIf"], [1, "form-row"], ["type", "number", "step", "0.01", "formControlName", "valorLancamento", "placeholder", "0,00", 1, "input"], ["formControlName", "tipoLancamento", 1, "input"], [3, "ngValue"], [1, "form-actions"], ["type", "button", 1, "btn", "btn-outline", 3, "click"], ["type", "submit", 1, "btn", "btn-primary", 3, "disabled"], ["class", "material-icons-outlined", 4, "ngIf"], [1, "validation-error"]], template: function LancamentoFormComponent_Template(rf, ctx) {
+_LancamentoFormComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LancamentoFormComponent, selectors: [["app-lancamento-form"]], standalone: false, decls: 15, vars: 5, consts: [[1, "page-header"], [1, "subtitle"], [1, "btn", "btn-outline", 3, "click"], [1, "material-icons-outlined"], [1, "card", "form-card"], ["class", "loading", 4, "ngIf"], [3, "formGroup", "ngSubmit", 4, "ngIf"], ["class", "card recent-adds-card", 4, "ngIf"], [1, "loading"], [1, "spinner"], [3, "ngSubmit", "formGroup"], [1, "form-section"], [1, "input-group"], ["formControlName", "nomeLancamento", "placeholder", "Ex.: Salario, Aluguel, Mercado...", 1, "input"], ["class", "validation-error", 4, "ngIf"], [1, "form-row"], ["type", "number", "step", "0.01", "formControlName", "valorLancamento", "placeholder", "0,00", 1, "input"], ["formControlName", "tipoLancamento", 1, "input"], [3, "ngValue"], [1, "form-actions"], ["type", "button", 1, "btn", "btn-outline", 3, "click"], ["type", "submit", 1, "btn", "btn-primary", 3, "disabled"], ["class", "material-icons-outlined", 4, "ngIf"], [1, "validation-error"], [1, "card", "recent-adds-card"], [1, "recent-adds-header"], [1, "recent-adds-count"], [1, "table-container"], [1, "table"], [4, "ngFor", "ngForOf"], [3, "ngClass"]], template: function LancamentoFormComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 0)(1, "div")(2, "h2");
     \u0275\u0275text(3);
@@ -48444,6 +48505,7 @@ _LancamentoFormComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent
     \u0275\u0275elementStart(11, "div", 4);
     \u0275\u0275template(12, LancamentoFormComponent_div_12_Template, 2, 0, "div", 5)(13, LancamentoFormComponent_form_13_Template, 27, 12, "form", 6);
     \u0275\u0275elementEnd();
+    \u0275\u0275template(14, LancamentoFormComponent_div_14_Template, 18, 2, "div", 7);
   }
   if (rf & 2) {
     \u0275\u0275advance(3);
@@ -48454,83 +48516,116 @@ _LancamentoFormComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent
     \u0275\u0275property("ngIf", ctx.loading);
     \u0275\u0275advance();
     \u0275\u0275property("ngIf", !ctx.loading);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngIf", !ctx.editMode && ctx.lancamentosAdicionados.length > 0);
   }
-}, dependencies: [NgIf, \u0275NgNoValidate, NgSelectOption, \u0275NgSelectMultipleOption, DefaultValueAccessor, NumberValueAccessor, SelectControlValueAccessor, NgControlStatus, NgControlStatusGroup, FormGroupDirective, FormControlName], styles: ["\n\n.form-card[_ngcontent-%COMP%] {\n  max-width: 600px;\n}\n.validation-error[_ngcontent-%COMP%] {\n  color: var(--danger);\n  font-size: 0.75rem;\n  margin-top: 4px;\n}\n.input.invalid[_ngcontent-%COMP%] {\n  border-color: var(--danger);\n}\n.input.invalid[_ngcontent-%COMP%]:focus {\n  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);\n}\n/*# sourceMappingURL=lancamento-form.component.css.map */"] });
+}, dependencies: [NgClass, NgForOf, NgIf, \u0275NgNoValidate, NgSelectOption, \u0275NgSelectMultipleOption, DefaultValueAccessor, NumberValueAccessor, SelectControlValueAccessor, NgControlStatus, NgControlStatusGroup, FormGroupDirective, FormControlName, CurrencyPipe], styles: ["\n\n.form-card[_ngcontent-%COMP%] {\n  max-width: 600px;\n}\n.recent-adds-card[_ngcontent-%COMP%] {\n  max-width: 600px;\n  margin-top: 20px;\n}\n.recent-adds-header[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-bottom: 16px;\n  font-size: 0.875rem;\n  font-weight: 600;\n  color: var(--text-secondary);\n}\n.recent-adds-count[_ngcontent-%COMP%] {\n  font-size: 0.75rem;\n  background: var(--border);\n  padding: 2px 8px;\n  border-radius: 10px;\n}\n.valor-receita[_ngcontent-%COMP%] {\n  color: var(--success);\n  font-weight: 600;\n}\n.valor-despesa[_ngcontent-%COMP%] {\n  color: var(--danger);\n  font-weight: 600;\n}\n.validation-error[_ngcontent-%COMP%] {\n  color: var(--danger);\n  font-size: 0.75rem;\n  margin-top: 4px;\n}\n.input.invalid[_ngcontent-%COMP%] {\n  border-color: var(--danger);\n}\n.input.invalid[_ngcontent-%COMP%]:focus {\n  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);\n}\n/*# sourceMappingURL=lancamento-form.component.css.map */"] });
 var LancamentoFormComponent = _LancamentoFormComponent;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(LancamentoFormComponent, [{
     type: Component,
-    args: [{ selector: "app-lancamento-form", standalone: false, template: `<div class="page-header">\r
-  <div>\r
-    <h2>{{ titulo }}</h2>\r
-    <div class="subtitle">{{ editMode ? 'Atualize os dados do lancamento' : 'Preencha os dados para criar um novo lancamento' }}</div>\r
-  </div>\r
-  <div>\r
-    <button class="btn btn-outline" (click)="voltar()">\r
-      <span class="material-icons-outlined">arrow_back</span>\r
-      Voltar\r
-    </button>\r
-  </div>\r
-</div>\r
-\r
-<div class="card form-card">\r
-  <div *ngIf="loading" class="loading">\r
-    <div class="spinner"></div>\r
-  </div>\r
-\r
-  <form (ngSubmit)="submit()" [formGroup]="form" *ngIf="!loading">\r
-    <div class="form-section">\r
-      <div class="input-group">\r
-        <label>Nome do Lancamento</label>\r
-        <input\r
-          class="input"\r
-          [class.invalid]="form.get('nomeLancamento')?.invalid && form.get('nomeLancamento')?.touched"\r
-          formControlName="nomeLancamento"\r
-          placeholder="Ex.: Salario, Aluguel, Mercado..." />\r
-        <div class="validation-error" *ngIf="form.get('nomeLancamento')?.invalid && form.get('nomeLancamento')?.touched">\r
-          Informe o nome do lancamento.\r
-        </div>\r
-      </div>\r
-    </div>\r
-\r
-    <div class="form-row">\r
-      <div class="input-group">\r
-        <label>Valor (R$)</label>\r
-        <input\r
-          class="input"\r
-          [class.invalid]="form.get('valorLancamento')?.invalid && form.get('valorLancamento')?.touched"\r
-          type="number"\r
-          step="0.01"\r
-          formControlName="valorLancamento"\r
-          placeholder="0,00" />\r
-        <div class="validation-error" *ngIf="form.get('valorLancamento')?.invalid && form.get('valorLancamento')?.touched">\r
-          Informe um valor valido.\r
-        </div>\r
-      </div>\r
-\r
-      <div class="input-group">\r
-        <label>Tipo</label>\r
-        <select class="input" formControlName="tipoLancamento">\r
-          <option [ngValue]="0">Receita</option>\r
-          <option [ngValue]="1">Despesa</option>\r
-        </select>\r
-      </div>\r
-    </div>\r
-\r
-    <div class="form-actions">\r
-      <button type="button" class="btn btn-outline" (click)="voltar()">Cancelar</button>\r
-      <button type="submit" class="btn btn-primary" [disabled]="saving || form.invalid">\r
-        <span class="material-icons-outlined" *ngIf="!saving">save</span>\r
-        {{ saving ? 'Salvando...' : 'Salvar' }}\r
-      </button>\r
-    </div>\r
-  </form>\r
-</div>\r
-`, styles: ["/* src/app/pages/lancamentos/lancamento-form.component.scss */\n.form-card {\n  max-width: 600px;\n}\n.validation-error {\n  color: var(--danger);\n  font-size: 0.75rem;\n  margin-top: 4px;\n}\n.input.invalid {\n  border-color: var(--danger);\n}\n.input.invalid:focus {\n  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);\n}\n/*# sourceMappingURL=lancamento-form.component.css.map */\n"] }]
+    args: [{ selector: "app-lancamento-form", standalone: false, template: `<div class="page-header">
+  <div>
+    <h2>{{ titulo }}</h2>
+    <div class="subtitle">{{ editMode ? 'Atualize os dados do lancamento' : 'Preencha os dados para criar um novo lancamento' }}</div>
+  </div>
+  <div>
+    <button class="btn btn-outline" (click)="voltar()">
+      <span class="material-icons-outlined">arrow_back</span>
+      Voltar
+    </button>
+  </div>
+</div>
+
+<div class="card form-card">
+  <div *ngIf="loading" class="loading">
+    <div class="spinner"></div>
+  </div>
+
+  <form (ngSubmit)="submit()" [formGroup]="form" *ngIf="!loading">
+    <div class="form-section">
+      <div class="input-group">
+        <label>Nome do Lancamento</label>
+        <input
+          class="input"
+          [class.invalid]="form.get('nomeLancamento')?.invalid && form.get('nomeLancamento')?.touched"
+          formControlName="nomeLancamento"
+          placeholder="Ex.: Salario, Aluguel, Mercado..." />
+        <div class="validation-error" *ngIf="form.get('nomeLancamento')?.invalid && form.get('nomeLancamento')?.touched">
+          Informe o nome do lancamento.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="input-group">
+        <label>Valor (R$)</label>
+        <input
+          class="input"
+          [class.invalid]="form.get('valorLancamento')?.invalid && form.get('valorLancamento')?.touched"
+          type="number"
+          step="0.01"
+          formControlName="valorLancamento"
+          placeholder="0,00" />
+        <div class="validation-error" *ngIf="form.get('valorLancamento')?.invalid && form.get('valorLancamento')?.touched">
+          Informe um valor valido.
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Tipo</label>
+        <select class="input" formControlName="tipoLancamento">
+          <option [ngValue]="0">Receita</option>
+          <option [ngValue]="1">Despesa</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn btn-outline" (click)="voltar()">Cancelar</button>
+      <button type="submit" class="btn btn-primary" [disabled]="saving || form.invalid">
+        <span class="material-icons-outlined" *ngIf="!saving">save</span>
+        {{ saving ? 'Salvando...' : 'Salvar' }}
+      </button>
+    </div>
+  </form>
+</div>
+
+<div class="card recent-adds-card" *ngIf="!editMode && lancamentosAdicionados.length > 0">
+  <div class="recent-adds-header">
+    <span>Adicionados nesta sessao</span>
+    <span class="recent-adds-count">{{ lancamentosAdicionados.length }}/5</span>
+  </div>
+  <div class="table-container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Valor</th>
+          <th>Tipo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let l of lancamentosAdicionados">
+          <td>{{ l.nomeLancamento }}</td>
+          <td [ngClass]="l.tipoLancamento === 'Receita' ? 'valor-receita' : 'valor-despesa'">
+            {{ l.valorLancamento | currency:'BRL' }}
+          </td>
+          <td>
+            <span [class]="'badge ' + (l.tipoLancamento === 'Receita' ? 'badge-receita' : 'badge-despesa')">
+              {{ l.tipoLancamento }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+`, styles: ["/* src/app/pages/lancamentos/lancamento-form.component.scss */\n.form-card {\n  max-width: 600px;\n}\n.recent-adds-card {\n  max-width: 600px;\n  margin-top: 20px;\n}\n.recent-adds-header {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-bottom: 16px;\n  font-size: 0.875rem;\n  font-weight: 600;\n  color: var(--text-secondary);\n}\n.recent-adds-count {\n  font-size: 0.75rem;\n  background: var(--border);\n  padding: 2px 8px;\n  border-radius: 10px;\n}\n.valor-receita {\n  color: var(--success);\n  font-weight: 600;\n}\n.valor-despesa {\n  color: var(--danger);\n  font-weight: 600;\n}\n.validation-error {\n  color: var(--danger);\n  font-size: 0.75rem;\n  margin-top: 4px;\n}\n.input.invalid {\n  border-color: var(--danger);\n}\n.input.invalid:focus {\n  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);\n}\n/*# sourceMappingURL=lancamento-form.component.css.map */\n"] }]
   }], () => [{ type: FormBuilder }, { type: ApiService }, { type: Router }, { type: ActivatedRoute }], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LancamentoFormComponent, { className: "LancamentoFormComponent", filePath: "src/app/pages/lancamentos/lancamento-form.component.ts", lineNumber: 12 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LancamentoFormComponent, { className: "LancamentoFormComponent", filePath: "src/app/pages/lancamentos/lancamento-form.component.ts", lineNumber: 13 });
 })();
 
 // src/app/app-routing.module.ts
@@ -48567,10 +48662,10 @@ function AppComponent_div_0_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
     \u0275\u0275elementStart(0, "div", 2)(1, "aside", 3)(2, "div", 4)(3, "div", 5);
-    \u0275\u0275text(4, "F");
+    \u0275\u0275text(4, "CF");
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(5, "div")(6, "div", 6);
-    \u0275\u0275text(7, "Financeiro");
+    \u0275\u0275text(7, "Controle Financeiro");
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(8, "div", 7);
     \u0275\u0275text(9, "Painel de controle");
@@ -48650,7 +48745,7 @@ var AppComponent = _AppComponent;
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(AppComponent, [{
     type: Component,
-    args: [{ selector: "app-root", standalone: false, template: '<div class="layout" *ngIf="auth.isAuthenticated(); else loginTemplate">\r\n  <aside class="sidebar">\r\n    <div class="sidebar-brand">\r\n      <div class="sidebar-logo">F</div>\r\n      <div>\r\n        <div class="sidebar-title">Financeiro</div>\r\n        <div class="sidebar-subtitle">Painel de controle</div>\r\n      </div>\r\n    </div>\r\n\r\n    <nav class="sidebar-nav">\r\n      <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">\r\n        <span class="material-icons-outlined">dashboard</span>\r\n        Dashboard\r\n      </a>\r\n      <a routerLink="/lancamentos" routerLinkActive="active">\r\n        <span class="material-icons-outlined">receipt_long</span>\r\n        Lancamentos\r\n      </a>\r\n      <a routerLink="/novo" routerLinkActive="active">\r\n        <span class="material-icons-outlined">add_circle_outline</span>\r\n        Novo Lancamento\r\n      </a>\r\n    </nav>\r\n\r\n    <div class="sidebar-footer">\r\n      <div class="sidebar-user">\r\n        <div class="sidebar-avatar">\r\n          <span class="material-icons-outlined">person</span>\r\n        </div>\r\n        <div class="sidebar-user-info">\r\n          <div style="font-weight:600;">Admin</div>\r\n          <div style="opacity:0.6; font-size:0.75rem;">Administrador</div>\r\n        </div>\r\n      </div>\r\n      <button class="btn btn-outline" style="width:100%; margin-top:12px; color:rgba(255,255,255,0.7); border-color:rgba(255,255,255,0.2);" (click)="logout()">\r\n        <span class="material-icons-outlined" style="font-size:18px;">logout</span>\r\n        Sair\r\n      </button>\r\n    </div>\r\n  </aside>\r\n\r\n  <main class="main-content">\r\n    <router-outlet></router-outlet>\r\n  </main>\r\n</div>\r\n\r\n<ng-template #loginTemplate>\r\n  <router-outlet></router-outlet>\r\n</ng-template>\r\n', styles: ["/* src/app/app.component.scss */\n:host {\n  display: block;\n}\n.layout {\n  display: flex;\n  min-height: 100vh;\n}\n/*# sourceMappingURL=app.component.css.map */\n"] }]
+    args: [{ selector: "app-root", standalone: false, template: '<div class="layout" *ngIf="auth.isAuthenticated(); else loginTemplate">\r\n  <aside class="sidebar">\r\n    <div class="sidebar-brand">\r\n      <div class="sidebar-logo">CF</div>\r\n      <div>\r\n        <div class="sidebar-title">Controle Financeiro</div>\r\n        <div class="sidebar-subtitle">Painel de controle</div>\r\n      </div>\r\n    </div>\r\n\r\n    <nav class="sidebar-nav">\r\n      <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">\r\n        <span class="material-icons-outlined">dashboard</span>\r\n        Dashboard\r\n      </a>\r\n      <a routerLink="/lancamentos" routerLinkActive="active">\r\n        <span class="material-icons-outlined">receipt_long</span>\r\n        Lancamentos\r\n      </a>\r\n      <a routerLink="/novo" routerLinkActive="active">\r\n        <span class="material-icons-outlined">add_circle_outline</span>\r\n        Novo Lancamento\r\n      </a>\r\n    </nav>\r\n\r\n    <div class="sidebar-footer">\r\n      <div class="sidebar-user">\r\n        <div class="sidebar-avatar">\r\n          <span class="material-icons-outlined">person</span>\r\n        </div>\r\n        <div class="sidebar-user-info">\r\n          <div style="font-weight:600;">Admin</div>\r\n          <div style="opacity:0.6; font-size:0.75rem;">Administrador</div>\r\n        </div>\r\n      </div>\r\n      <button class="btn btn-outline" style="width:100%; margin-top:12px; color:rgba(255,255,255,0.7); border-color:rgba(255,255,255,0.2);" (click)="logout()">\r\n        <span class="material-icons-outlined" style="font-size:18px;">logout</span>\r\n        Sair\r\n      </button>\r\n    </div>\r\n  </aside>\r\n\r\n  <main class="main-content">\r\n    <router-outlet></router-outlet>\r\n  </main>\r\n</div>\r\n\r\n<ng-template #loginTemplate>\r\n  <router-outlet></router-outlet>\r\n</ng-template>\r\n', styles: ["/* src/app/app.component.scss */\n:host {\n  display: block;\n}\n.layout {\n  display: flex;\n  min-height: 100vh;\n}\n/*# sourceMappingURL=app.component.css.map */\n"] }]
   }], () => [{ type: AuthService }, { type: Router }], null);
 })();
 (() => {

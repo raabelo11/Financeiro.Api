@@ -64,3 +64,34 @@
     </div>
   </form>
 </div>
+
+<div class="card recent-adds-card" *ngIf="!editMode && lancamentosAdicionados.length > 0">
+  <div class="recent-adds-header">
+    <span>Adicionados nesta sessao</span>
+    <span class="recent-adds-count">{{ lancamentosAdicionados.length }}/5</span>
+  </div>
+  <div class="table-container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Valor</th>
+          <th>Tipo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let l of lancamentosAdicionados">
+          <td>{{ l.nomeLancamento }}</td>
+          <td [ngClass]="l.tipoLancamento === 'Receita' ? 'valor-receita' : 'valor-despesa'">
+            {{ l.valorLancamento | currency:'BRL' }}
+          </td>
+          <td>
+            <span [class]="'badge ' + (l.tipoLancamento === 'Receita' ? 'badge-receita' : 'badge-despesa')">
+              {{ l.tipoLancamento }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

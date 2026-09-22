@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
-import { Lancamento } from '../../models/lancamento.model';
+import { Lancamento, LancamentoPorPeriodoReturn } from '../../models/lancamento.model';
 
 interface MesOption {
   value: number;
@@ -14,7 +14,7 @@ interface MesOption {
   styleUrls: ['./lancamentos-list.component.scss']
 })
 export class LancamentosListComponent implements OnInit {
-  lancamentos: Lancamento[] = [];
+  lancamentos: LancamentoPorPeriodoReturn | null = null;
   filtroInicio: string = '';
   filtroFim: string = '';
   saldoPeriodo: number | null = null;
@@ -60,24 +60,24 @@ export class LancamentosListComponent implements OnInit {
 
   get lancamentosFiltrados(): Lancamento[] {
     if (this.tabAtiva === 'receitas') {
-      return this.lancamentos.filter(l => l.tipoLancamento === 0);
+      return this.lancamentos ? this.lancamentos.lancamentos.filter(l => l.tipoLancamento === 0) : [];
     }
     if (this.tabAtiva === 'despesas') {
-      return this.lancamentos.filter(l => l.tipoLancamento === 1);
+      return this.lancamentos ? this.lancamentos.lancamentos.filter(l => l.tipoLancamento === 1) : [];
     }
-    return this.lancamentos;
+    return this.lancamentos ? this.lancamentos.lancamentos : [];
   }
 
   get totalReceitas(): number {
-    return this.lancamentos
+    return this.lancamentos ? this.lancamentos.lancamentos
       .filter(l => l.tipoLancamento === 0)
-      .reduce((s, l) => s + l.valorLancamento, 0);
+      .reduce((s, l) => s + l.valorLancamento, 0) : 0;
   }
 
   get totalDespesas(): number {
-    return this.lancamentos
+    return this.lancamentos ? this.lancamentos.lancamentos
       .filter(l => l.tipoLancamento === 1)
-      .reduce((s, l) => s + l.valorLancamento, 0);
+      .reduce((s, l) => s + l.valorLancamento, 0) : 0;
   }
 
   get saldoLista(): number {
@@ -85,15 +85,15 @@ export class LancamentosListComponent implements OnInit {
   }
 
   get countTodos(): number {
-    return this.lancamentos.length;
+    return this.lancamentos ? this.lancamentos.lancamentos.length : 0;
   }
 
   get countReceitas(): number {
-    return this.lancamentos.filter(l => l.tipoLancamento === 0).length;
+    return this.lancamentos ? this.lancamentos.lancamentos.filter(l => l.tipoLancamento === 0).length : 0;
   }
 
   get countDespesas(): number {
-    return this.lancamentos.filter(l => l.tipoLancamento === 1).length;
+    return this.lancamentos ? this.lancamentos.lancamentos.filter(l => l.tipoLancamento === 1).length : 0;
   }
 
   get temFiltroAtivo(): boolean {
@@ -113,7 +113,7 @@ export class LancamentosListComponent implements OnInit {
     this.periodoAtivo = 'personalizado';
     this.loading = true;
     this.api.getLancamentosPorPeriodo(this.filtroInicio, this.filtroFim).subscribe({
-      next: (r) => { this.lancamentos = r.lancamentos; this.saldoPeriodo = r.saldoPeriodo; this.loading = false; },
+      next: (r: LancamentoPorPeriodoReturn) => { this.lancamentos = r; this.saldoPeriodo = r.saldoPeriodo; this.loading = false; },
       error: () => { this.loading = false; }
     });
   }
@@ -174,18 +174,6 @@ export class LancamentosListComponent implements OnInit {
   }
 
   excluirLancamento() {
-    if (!this.lancamentoParaExcluir || !this.lancamentoParaExcluir.id) return;
-    const id = this.lancamentoParaExcluir.id;
-    this.excluindo = true;
-    this.api.deleteLancamento(id).subscribe({
-      next: () => {
-        this.lancamentos = this.lancamentos.filter(l => l.id !== id);
-        this.excluindo = false;
-        this.mostrarModalExcluir = false;
-        this.lancamentoParaExcluir = null;
-      },
-      error: () => { this.excluindo = false; }
-    });
   }
 
   private buscarPorIntervalo(dataInicio: Date, dataFim: Date) {
@@ -195,7 +183,7 @@ export class LancamentosListComponent implements OnInit {
 
     this.api.getLancamentosPorPeriodo(inicio, fim).subscribe({
       next: (res) => {
-        this.lancamentos = res.lancamentos;
+        this.lancamentos = res;
         this.saldoPeriodo = res.saldoPeriodo;
         this.loading = false;
       },
