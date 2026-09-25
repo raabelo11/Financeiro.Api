@@ -187,6 +187,17 @@ export class LancamentosListComponent implements OnInit {
   }
 
   excluirLancamento() {
+    if (!this.lancamentoParaExcluir?.id) return;
+    this.excluindo = true;
+    this.api.deleteLancamento(this.lancamentoParaExcluir.id).subscribe({
+      next: () => {
+        this.excluindo = false;
+        this.mostrarModalExcluir = false;
+        this.lancamentoParaExcluir = null;
+        this.loadAll();
+      },
+      error: () => { this.excluindo = false; }
+    });
   }
 
   private buscarPorIntervalo(dataInicio: Date, dataFim: Date) {

@@ -4,6 +4,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LancamentosListComponent } from './pages/lancamentos/lancamentos-list.component';
 import { LancamentoFormComponent } from './pages/lancamentos/lancamento-form.component';
+import { CategoriasComponent } from './pages/categorias/categorias.component';
+import { VisaoGeralComponent } from './pages/visao-geral/visao-geral.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -12,6 +14,8 @@ const routes: Routes = [
   { path: 'lancamentos', component: LancamentosListComponent },
   { path: 'novo', component: LancamentoFormComponent },
   { path: 'editar/:id', component: LancamentoFormComponent },
+  { path: 'categorias', component: CategoriasComponent },
+  { path: 'visao-geral', component: VisaoGeralComponent },
   { path: '**', redirectTo: 'dashboard' }
 ];
 

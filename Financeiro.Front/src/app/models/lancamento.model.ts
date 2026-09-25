@@ -2,14 +2,19 @@ export interface Lancamento {
   id?: number;
   nomeLancamento: string;
   valorLancamento: number;
-  tipoLancamento: string; // 0 = Receita, 1 = Despesa
+  tipoLancamento: 'Receita' | 'Despesa';
   dataLancamento?: string;
+  categoriaId?: number | null;
+  categoriaNome?: string | null;
+  categoriaIcone?: string | null;
+  categoriaCor?: string | null;
 }
 
 export interface CriarLancamentoPayload {
   nomeLancamento: string;
   valorLancamento: number;
   tipoLancamento: 'Receita' | 'Despesa';
+  categoriaId?: number | null;
 }
 
 export interface LancamentoPorPeriodoReturn {

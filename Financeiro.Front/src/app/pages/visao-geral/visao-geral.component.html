@@ -1,0 +1,98 @@
+<div class="page-header">
+  <div>
+    <h2>Visão Geral</h2>
+    <div class="subtitle">Despesas por categoria</div>
+  </div>
+</div>
+
+<div class="summary-cards">
+  <div class="summary-card">
+    <div class="summary-card-icon despesa">
+      <span class="material-icons-outlined">payments</span>
+    </div>
+    <div class="summary-card-info">
+      <div class="summary-card-label">Total de despesas</div>
+      <div class="summary-card-value">{{ totalDespesas | currency:'BRL' }}</div>
+    </div>
+  </div>
+</div>
+
+<div class="card dashboard-period-card">
+  <div class="quick-filters">
+    <button
+      type="button"
+      class="quick-filter"
+      [class.active]="periodoAtivo === 'todos'"
+      (click)="selecionarPeriodo('todos')">
+      Todos
+    </button>
+    <button
+      type="button"
+      class="quick-filter"
+      [class.active]="periodoAtivo === 'mes_atual'"
+      (click)="selecionarPeriodo('mes_atual')">
+      Este Mes
+    </button>
+    <button
+      type="button"
+      class="quick-filter"
+      [class.active]="periodoAtivo === 'mes_anterior'"
+      (click)="selecionarPeriodo('mes_anterior')">
+      Mes Anterior
+    </button>
+    <button
+      type="button"
+      class="quick-filter"
+      [class.active]="periodoAtivo === 'ano_atual'"
+      (click)="selecionarPeriodo('ano_atual')">
+      Este Ano
+    </button>
+  </div>
+
+  <div class="period-selects">
+    <div class="input-group">
+      <select class="input" [(ngModel)]="mesSelecionado">
+        <option *ngFor="let mes of meses" [value]="mes.value">{{ mes.label }}</option>
+      </select>
+    </div>
+    <div class="input-group">
+      <select class="input" [(ngModel)]="anoSelecionado">
+        <option *ngFor="let ano of anos" [value]="ano">{{ ano }}</option>
+      </select>
+    </div>
+    <button type="button" class="btn btn-primary btn-sm" (click)="filtrarPorMesAno()">
+      <span class="material-icons-outlined">calendar_today</span>
+      Filtrar
+    </button>
+  </div>
+</div>
+
+<div *ngIf="loading" class="loading">
+  <div class="spinner"></div>
+</div>
+
+<div *ngIf="!loading">
+  <div *ngIf="semDados" class="empty-state">
+    <span class="material-icons-outlined">pie_chart</span>
+    <div>Nenhuma despesa no período</div>
+  </div>
+
+  <div class="summary-cards categoria-cards" *ngIf="!semDados">
+    <div class="summary-card categoria-card" [class.top]="card.categoriaId === topCategoriaId" *ngFor="let card of cards">
+      <div class="summary-card-icon categoria-icon-chip" [style.color]="card.cor">
+        <span class="material-icons-outlined">{{ card.icone }}</span>
+      </div>
+      <div class="summary-card-info">
+        <div class="summary-card-label">{{ card.nome }}</div>
+        <div class="summary-card-value">{{ card.total | currency:'BRL' }}</div>
+        <div class="categoria-count">{{ card.count }} lançamento(s)</div>
+        <div class="categoria-percent-bar">
+          <div class="categoria-percent-track">
+            <div class="categoria-percent-fill" [style.width.%]="card.percentual" [style.background]="card.cor"></div>
+          </div>
+          <span class="categoria-percent-label">{{ card.percentual | number:'1.0-0' }}%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

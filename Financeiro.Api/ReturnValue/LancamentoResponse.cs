@@ -1,8 +1,8 @@
-﻿using Financeiro.Api.Enums;
+using Financeiro.Api.Enums;
 
-namespace Financeiro.Api.Data.Models
+namespace Financeiro.Api.ReturnValue
 {
-    public class Lancamento
+    public class LancamentoResponse
     {
         public int Id { get; set; }
         public string NomeLancamento { get; set; } = string.Empty;
@@ -10,6 +10,8 @@ namespace Financeiro.Api.Data.Models
         public TipoLancamento TipoLancamento { get; set; }
         public DateTime DataLancamento { get; set; }
         public int? CategoriaId { get; set; }
-        public Categoria? Categoria { get; set; }
+        public string? CategoriaNome { get; set; }
+        public string? CategoriaIcone { get; set; }
+        public string? CategoriaCor { get; set; }
     }
 }

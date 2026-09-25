@@ -47,11 +47,16 @@
       </div>
 
       <div class="input-group">
-        <label>Tipo</label>
-        <select class="input" formControlName="tipoLancamento">
-          <option [ngValue]="0">Receita</option>
-          <option [ngValue]="1">Despesa</option>
-        </select>
+        <label>Tipo / Categoria</label>
+        <div style="display:flex; gap:8px; align-items:flex-end;">
+          <select class="input" formControlName="selecao">
+            <option value="RECEITA">Receita</option>
+            <option *ngFor="let c of categorias" [value]="c.id">{{ c.nome }}</option>
+          </select>
+          <button type="button" class="btn btn-outline btn-sm" (click)="abrirNovoTipo()">
+            <span class="material-icons-outlined">add</span> Novo tipo
+          </button>
+        </div>
       </div>
     </div>
 
@@ -59,10 +64,37 @@
       <button type="button" class="btn btn-outline" (click)="voltar()">Cancelar</button>
       <button type="submit" class="btn btn-primary" [disabled]="saving || form.invalid">
         <span class="material-icons-outlined" *ngIf="!saving">save</span>
-        {{ saving ? 'Salvando...' : 'Salvar' }}
+        {{ saving ? 'Salvando...' : (editMode ? 'Atualizar' : 'Salvar') }}
       </button>
     </div>
   </form>
+</div>
+
+<div class="modal-overlay" *ngIf="mostrarNovoTipo">
+  <div class="modal">
+    <h3>Novo Tipo (Categoria)</h3>
+    <form [formGroup]="novoTipoForm" (ngSubmit)="salvarNovoTipo()">
+      <div class="input-group">
+        <label>Nome</label>
+        <input class="input" formControlName="nome" placeholder="Ex.: Alimentacao, Transporte..." />
+      </div>
+      <div class="input-group">
+        <label>Icone</label>
+        <input class="input" formControlName="icone" placeholder="Ex.: shopping_cart, local_taxi" />
+      </div>
+      <div class="input-group">
+        <label>Cor</label>
+        <input type="color" formControlName="cor" />
+      </div>
+      <div class="alert-danger" *ngIf="erroNovoTipo">{{ erroNovoTipo }}</div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-outline" (click)="fecharNovoTipo()">Cancelar</button>
+        <button type="submit" class="btn btn-primary" [disabled]="salvandoTipo || novoTipoForm.invalid">
+          {{ salvandoTipo ? 'Salvando...' : 'Salvar' }}
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
 
 <div class="card recent-adds-card" *ngIf="!editMode && lancamentosAdicionados.length > 0">

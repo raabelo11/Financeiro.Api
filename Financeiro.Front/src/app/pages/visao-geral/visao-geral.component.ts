@@ -1,30 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
-import { Lancamento, LancamentoPorPeriodoReturn } from '../../models/lancamento.model';
+import { LancamentoPorPeriodoReturn } from '../../models/lancamento.model';
 
 interface MesOption {
   value: number;
   label: string;
 }
 
+interface CategoriaCard {
+  categoriaId: number;
+  nome: string;
+  icone: string;
+  cor: string;
+  total: number;
+  count: number;
+  percentual: number;
+}
+
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-visao-geral',
   standalone: false,
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  templateUrl: './visao-geral.component.html',
+  styleUrls: ['./visao-geral.component.scss']
 })
-export class DashboardComponent implements OnInit {
-  lancamentos: LancamentoPorPeriodoReturn | null = null;
-  recentLancamentos: LancamentoPorPeriodoReturn | null = null;
-
-  totalReceitas = 0;
-  totalDespesas = 0;
-  saldoTotal = 0;
-  saldoPeriodo: number | null = null;
-  countLancamentos = 0;
-  semLancamentos = false;
+export class VisaoGeralComponent implements OnInit {
   loading = false;
-
   periodoAtivo = 'todos';
 
   mesSelecionado!: number;
@@ -47,6 +47,11 @@ export class DashboardComponent implements OnInit {
 
   anos: number[] = [];
 
+  cards: CategoriaCard[] = [];
+  totalDespesas = 0;
+  topCategoriaId: number | null = null;
+  semDados = false;
+
   constructor(private api: ApiService) { }
 
   ngOnInit(): void {
@@ -60,23 +65,8 @@ export class DashboardComponent implements OnInit {
 
   load() {
     this.loading = true;
-    this.saldoPeriodo = null;
     this.api.getLancamentos().subscribe({
-      next: (res) => {
-        if (!res) {
-          this.semLancamentos = true;
-          this.loading = false;
-          return;
-        }
-        this.semLancamentos = false;
-        this.lancamentos = res;
-        this.atualizarListaExibida();
-        this.calcularTotais();
-        this.saldoPeriodo = res.saldoPeriodo;
-        this.totalDespesas = res.totalDespesas;
-        this.totalReceitas = res.totalReceitas;
-        this.loading = false;
-      },
+      next: (res) => { this.aggregate(res); this.loading = false; },
       error: () => { this.loading = false; }
     });
   }
@@ -118,46 +108,56 @@ export class DashboardComponent implements OnInit {
     this.loading = true;
     const inicio = this.formatarData(dataInicio);
     const fim = this.formatarData(dataFim);
-    this.semLancamentos = false;
     this.api.getLancamentosPorPeriodo(inicio, fim).subscribe({
-      next: (res) => {
-        if (!res) {
-          this.semLancamentos = true;
-          this.loading = false;
-          return;
-        }
-        this.lancamentos = res;
-        this.saldoPeriodo = res.saldoPeriodo;
-        this.atualizarListaExibida();
-        this.calcularTotais();
-        this.loading = false;
-      },
+      next: (res) => { this.aggregate(res); this.loading = false; },
       error: () => { this.loading = false; }
     });
   }
 
-  private atualizarListaExibida() {
-    this.recentLancamentos = this.lancamentos ? { 
-      ...this.lancamentos, 
-      lancamentos: this.lancamentos.lancamentos.slice(0, 8) 
-    } : null;
-  }
+  private aggregate(res: LancamentoPorPeriodoReturn | null) {
+    if (!res || !res.lancamentos || res.lancamentos.length === 0) {
+      this.cards = [];
+      this.totalDespesas = 0;
+      this.semDados = true;
+      this.topCategoriaId = null;
+      return;
+    }
 
-  get saldoExibido(): number {
-    return this.saldoPeriodo !== null ? this.saldoPeriodo : this.saldoTotal;
-  }
+    const despesas = res.lancamentos.filter(l => l.tipoLancamento === 'Despesa');
 
-  private calcularTotais() {
-    this.totalReceitas = this.lancamentos ? this.lancamentos.lancamentos
-      .filter(l => l.tipoLancamento === 'Receita')
-      .reduce((s, l) => s + l.valorLancamento, 0) : 0;
+    const grupos = new Map<number, CategoriaCard>();
 
-    this.totalDespesas = this.lancamentos ? this.lancamentos.lancamentos
-      .filter(l => l.tipoLancamento === 'Despesa')
-      .reduce((s, l) => s + l.valorLancamento, 0) : 0;
+    for (const l of despesas) {
+      const categoriaId = l.categoriaId ?? 0;
+      let grupo = grupos.get(categoriaId);
+      if (!grupo) {
+        grupo = {
+          categoriaId,
+          nome: l.categoriaNome ?? 'Outros',
+          icone: l.categoriaIcone ?? 'category',
+          cor: l.categoriaCor ?? '#64748B',
+          total: 0,
+          count: 0,
+          percentual: 0
+        };
+        grupos.set(categoriaId, grupo);
+      }
+      grupo.total += l.valorLancamento;
+      grupo.count += 1;
+    }
 
-    this.saldoTotal = this.totalReceitas - this.totalDespesas;
-    this.countLancamentos = this.lancamentos ? this.lancamentos.lancamentos.length : 0;
+    const cards = Array.from(grupos.values()).filter(g => g.count > 0 && g.total !== 0);
+    this.totalDespesas = cards.reduce((s, c) => s + c.total, 0);
+
+    for (const c of cards) {
+      c.percentual = this.totalDespesas > 0 ? (c.total / this.totalDespesas) * 100 : 0;
+    }
+
+    cards.sort((a, b) => b.total - a.total);
+
+    this.cards = cards;
+    this.semDados = cards.length === 0;
+    this.topCategoriaId = cards.length > 0 ? cards[0].categoriaId : null;
   }
 
   private gerarUltimosAnos(anoAtual: number): number[] {

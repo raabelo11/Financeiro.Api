@@ -1,0 +1,12 @@
+.categoria-icone {
+  font-size: 1.4rem;
+  vertical-align: middle;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, currentColor 12%, transparent);
+  box-shadow: var(--shadow-sm);
+}

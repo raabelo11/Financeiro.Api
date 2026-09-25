@@ -1,0 +1,104 @@
+<div class="page-header">
+  <div>
+    <h2>Categorias</h2>
+    <div class="subtitle">Gerencie os tipos de despesa</div>
+  </div>
+  <div>
+    <button class="btn btn-primary" (click)="abrirNova()">
+      <span class="material-icons-outlined">add_circle_outline</span>
+      Nova categoria
+    </button>
+  </div>
+</div>
+
+<div *ngIf="loading" class="loading">
+  <div class="spinner"></div>
+</div>
+
+<div class="card" *ngIf="!loading">
+  <div *ngIf="categorias.length === 0" class="empty-state">
+    <span class="material-icons-outlined">sell</span>
+    <div>Nenhuma categoria encontrada</div>
+  </div>
+
+  <div class="table-container" *ngIf="categorias.length > 0">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Icone</th>
+          <th>Nome</th>
+          <th>Lançamentos</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of categorias">
+          <td>
+            <span class="material-icons-outlined categoria-icone" [style.color]="c.cor">{{ c.icone }}</span>
+          </td>
+          <td>{{ c.nome }}</td>
+          <td>{{ c.quantidadeLancamentos }}</td>
+          <td>
+            <button class="btn-icon" (click)="abrirEdicao(c)" title="Editar">
+              <span class="material-icons-outlined">edit</span>
+            </button>
+            <button class="btn-icon danger" (click)="confirmarExclusao(c)" title="Excluir">
+              <span class="material-icons-outlined">delete</span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="modal-overlay" *ngIf="mostrarModal">
+  <div class="modal">
+    <h3>{{ editando ? 'Editar categoria' : 'Nova categoria' }}</h3>
+    <form [formGroup]="form" (ngSubmit)="salvar()">
+      <div class="form-section">
+        <div class="input-group">
+          <label>Nome</label>
+          <input class="input" type="text" formControlName="nome" />
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="input-group">
+          <label>Icone</label>
+          <input class="input" type="text" formControlName="icone" placeholder="Ex.: shopping_cart, local_taxi, restaurant" />
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="input-group">
+          <label>Cor</label>
+          <input type="color" formControlName="cor" class="input" style="height:44px; padding:4px;" />
+        </div>
+      </div>
+
+      <div class="alert alert-danger" *ngIf="erroForm">{{ erroForm }}</div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn btn-outline" (click)="fecharModal()">Cancelar</button>
+        <button type="submit" class="btn btn-primary" [disabled]="salvando || form.invalid">
+          {{ salvando ? 'Salvando...' : 'Salvar' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal-overlay" *ngIf="mostrarModalExcluir">
+  <div class="modal">
+    <h3>Excluir categoria</h3>
+    <p>Tem certeza que deseja excluir a categoria '{{ categoriaParaExcluir?.nome }}'? Esta ação não pode ser desfeita.</p>
+
+    <div class="alert alert-danger" *ngIf="erroExcluir">{{ erroExcluir }}</div>
+
+    <div class="modal-actions">
+      <button type="button" class="btn btn-outline" (click)="cancelarExclusao()">Cancelar</button>
+      <button type="button" class="btn btn-danger" [disabled]="excluindo" (click)="excluir()">
+        {{ excluindo ? 'Excluindo...' : 'Excluir' }}
+      </button>
+    </div>
+  </div>
+</div>

@@ -10,6 +10,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LancamentosListComponent } from './pages/lancamentos/lancamentos-list.component';
 import { LancamentoFormComponent } from './pages/lancamentos/lancamento-form.component';
+import { CategoriasComponent } from './pages/categorias/categorias.component';
+import { VisaoGeralComponent } from './pages/visao-geral/visao-geral.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { LancamentoFormComponent } from './pages/lancamentos/lancamento-form.com
     LoginComponent,
     DashboardComponent,
     LancamentosListComponent,
-    LancamentoFormComponent
+    LancamentoFormComponent,
+    CategoriasComponent,
+    VisaoGeralComponent
   ],
   imports: [
     BrowserModule,
